@@ -1,0 +1,46 @@
+# oibench run --sweep sweep.example.toml
+#
+# Each method expands to (grid point) x (mode). Modes:
+#   forced   seq/bitmap/sort off: only the vector index can answer
+#   planner  Postgres defaults: may choose exact GIN bitmap + sort for selective filters
+
+prefix = "m1"                 # tables m1_hnsw / m1_prism from `oibench load --prefix m1`
+statement_timeout = "60s"
+explain_per_cell = 3          # EXPLAIN ANALYZE the first N queries of each cell, per config
+kinds = ["filter", "group_label", "diverse"]   # default; a method can narrow it with its own `kinds`
+modes = ["forced", "planner"]
+
+# Exact baseline: no vector index allowed, so filters use GIN + sort or a seq scan.
+# Its latency is the bar the indexes have to beat; its recall should be 1.0.
+[methods.exact]
+table = "hnsw"
+gucs = { enable_indexscan = "off" }
+modes = ["planner"]
+
+# pgvector HNSW, no iterative scan: returns at most ef_search rows *before* the filter,
+# so selective filters (and LIMIT > ef_search) come back short.
+[methods.hnsw]
+table = "hnsw"
+gucs = { "hnsw.iterative_scan" = "off" }
+grid = { "hnsw.ef_search" = [40, 100, 400] }
+
+# pgvector HNSW with iterative scan: keeps walking the graph until LIMIT rows pass the
+# filter, or until max_scan_tuples (or work_mem x scan_mem_multiplier) runs out.
+# Expensive at 1M: each query may walk up to max_scan_tuples graph nodes, and a 100-group
+# lateral query does that 100 times (~50 min per config with groups included). So this
+# method skips group_label, and ef_search is pinned: with iterative scan it only sizes the
+# first batch, while max_scan_tuples decides how far the scan can go.
+[methods.hnsw_iter]
+table = "hnsw"
+kinds = ["filter", "diverse"]
+grid = { "hnsw.ef_search" = [40], "hnsw.iterative_scan" = ["relaxed_order", "strict_order"], "hnsw.max_scan_tuples" = [20000, 200000] }
+
+# pg_vectorsearch PRISM. nprobe 0 = auto (~0.5 * sqrt(nlist)).
+[methods.prism]
+table = "prism"
+grid = { "prism.nprobe" = [0, 16, 64, 256] }
+
+# How grouped and diversified queries are written (filters have one shape).
+[strategies]
+group_label = ["lateral", "overfetch:1000", "overfetch:10000"]
+diverse = ["overfetch:200", "overfetch:2000"]

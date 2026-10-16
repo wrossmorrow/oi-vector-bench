@@ -1,0 +1,37 @@
+[project]
+name = "oilake"
+version = "0.1.0"
+description = "Open Images metadata + PE-Core embeddings as a Delta lake on S3, for filtered/grouped vector-search benchmarks"
+requires-python = ">=3.11"   # tomllib
+dependencies = [
+    "pyarrow>=15",      # FixedSizeListArray.from_arrays(mask=...), S3 filesystem
+    "deltalake>=1.0",   # delta-rs writer; no Spark, no catalog
+    "pandas>=2.2",      # pyarrow imports it if present; pin a numpy-2-compatible build
+    "numpy>=1.26",
+]
+
+[project.optional-dependencies]
+embed = [
+    "torch>=2.3",
+    "open_clip_torch>=2.32",  # must include the timm/PE-Core-* configs
+    "timm>=1.0.16",
+    "pillow>=10",
+    "boto3>=1.34",
+]
+bench = [
+    "psycopg[binary]>=3.2",
+    "pgvector>=0.4",    # HalfVector + psycopg type registration
+    "tabulate>=0.9",    # pandas.to_markdown in reports
+]
+dev = ["pytest>=8"]
+
+[project.scripts]
+oilake = "oilake.cli:main"
+oibench = "oibench.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]

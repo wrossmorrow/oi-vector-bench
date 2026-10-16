@@ -1,0 +1,32 @@
+# Sized for a 128 GiB / 16 vCPU host (r7i.4xlarge). For 64 GiB, halve
+# shared_buffers, effective_cache_size and maintenance_work_mem.
+services:
+  pg:
+    build: .
+    image: oibench-pg:18
+    shm_size: 34g                    # >= shared_buffers
+    environment:
+      POSTGRES_PASSWORD: bench
+    ports: ["127.0.0.1:5432:5432"]
+    volumes:
+      - pgdata:/var/lib/postgresql   # PG 18 images keep PGDATA under this directory
+    command: >
+      postgres
+      -c shared_buffers=32GB
+      -c effective_cache_size=96GB
+      -c maintenance_work_mem=16GB
+      -c work_mem=256MB
+      -c max_worker_processes=16
+      -c max_parallel_workers=16
+      -c max_parallel_maintenance_workers=8
+      -c max_parallel_workers_per_gather=0
+      -c jit=off
+      -c random_page_cost=1.1
+      -c effective_io_concurrency=200
+      -c max_wal_size=32GB
+      -c checkpoint_timeout=30min
+      -c wal_level=minimal
+      -c max_wal_senders=0
+      -c synchronous_commit=off
+volumes:
+  pgdata: {}
