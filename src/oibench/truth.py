@@ -20,7 +20,7 @@ def as_query(q: np.ndarray) -> np.ndarray:
 
 
 class Exact:
-    def __init__(self, emb16: np.ndarray):
+    def __init__(self, emb16: np.ndarray) -> None:
         e = np.asarray(emb16, dtype=np.float32)
         norms = np.linalg.norm(e, axis=1, keepdims=True)
         norms[norms == 0] = 1.0

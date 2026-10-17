@@ -21,7 +21,7 @@ from oilake.sample import read_sample_ids
 from .data import CSR, Dataset
 
 
-def _log(*a):
+def _log(*a) -> None:
     print(*a, file=sys.stderr)
 
 

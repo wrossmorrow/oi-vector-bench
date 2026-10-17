@@ -14,6 +14,9 @@ format:
 check:
     uv run ruff format --check .
 
+types:
+    uv run mypy src
+
 lambda-ssh ip user=ssh_usr_lambda ssh_key=ssh_key_lambda:
     just ssh {{ip}} {{user}} {{ssh_key}}
 

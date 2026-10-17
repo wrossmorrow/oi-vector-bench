@@ -210,7 +210,7 @@ def plan_nodes(plan: dict) -> list[str]:
     """Flatten a JSON plan to 'Node Type[:Index Name]' strings."""
     out = []
 
-    def walk(p):
+    def walk(p) -> None:
         s = p.get("Node Type", "?")
         if "Index Name" in p:
             s += ":" + p["Index Name"]

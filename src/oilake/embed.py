@@ -166,7 +166,7 @@ def load_encoder(model_id: str, device: str = "auto") -> Encoder:
 class S3MirrorFetcher:
     """Unsigned reads from the public mirror; one boto3 client per process."""
 
-    def __init__(self, bucket: str = sources.MIRROR_BUCKET):
+    def __init__(self, bucket: str = sources.MIRROR_BUCKET) -> None:
         self.bucket = bucket
         self._client = None
         self._pid = None
@@ -198,7 +198,7 @@ class S3MirrorFetcher:
 class LocalFetcher:
     """Read keys under a local directory (an `aws s3 sync` copy, or test fixtures)."""
 
-    def __init__(self, root: str):
+    def __init__(self, root: str) -> None:
         self.root = root
 
     def __call__(self, key: str) -> bytes:
@@ -233,7 +233,7 @@ class UnitDataset:
     without torch.
     """
 
-    def __init__(self, rows: list[dict], fetch, preprocess, apply_rotation: bool):
+    def __init__(self, rows: list[dict], fetch, preprocess, apply_rotation: bool) -> None:
         self.rows = rows
         self.fetch = fetch
         self.preprocess = preprocess
@@ -245,7 +245,7 @@ class UnitDataset:
         state["_pool"] = None
         return state
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self.rows)
 
     def _process(self, i, data):
