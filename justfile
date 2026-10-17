@@ -17,6 +17,9 @@ check:
 types:
     uv run mypy src
 
+test:
+    uv run --extra embed --extra bench python -m unittest discover -s tests
+
 lambda-ssh ip user=ssh_usr_lambda ssh_key=ssh_key_lambda:
     just ssh {{ip}} {{user}} {{ssh_key}}
 
