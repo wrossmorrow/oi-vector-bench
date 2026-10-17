@@ -40,6 +40,27 @@ grid = { "hnsw.ef_search" = [40], "hnsw.iterative_scan" = ["relaxed_order", "str
 table = "prism"
 grid = { "prism.nprobe" = [0, 16, 64, 256] }
 
+# Probe-then-route (filter queries only). An unfiltered top-`probe` scan through the vector
+# index counts how many of the query's nearest neighbours pass the filter, i.e. the
+# filter's lift around this query, which the planner can't see. If fewer than factor × k
+# pass, the query runs on the exact plan (label index + sort); otherwise on the index.
+# Latency includes the probe. HNSW returns at most ef_search rows, so its probe looks at
+# exactly the candidates its filtered scan would see.
+[methods.routed_prism]
+table = "prism"
+router = { probe = 200, factor = 1.0 }
+grid = { "prism.nprobe" = [0, 64] }
+modes = ["planner"]
+kinds = ["filter"]
+
+[methods.routed_hnsw]
+table = "hnsw"
+router = { probe = 400, factor = 1.0 }
+gucs = { "hnsw.iterative_scan" = "off" }
+grid = { "hnsw.ef_search" = [100, 400] }
+modes = ["planner"]
+kinds = ["filter"]
+
 # How grouped and diversified queries are written (filters have one shape).
 [strategies]
 group_label = ["lateral", "overfetch:1000", "overfetch:10000"]

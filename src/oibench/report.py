@@ -66,6 +66,7 @@ def summarize(workload_dir: str, results_dir: str):
                     "short": short,
                     "error": "error" in r,
                     "latency_ms": r["latency_ms"],
+                    "route": r.get("route"),  # routed methods only: "index" | "exact"
                 }
             )
     df = pd.DataFrame(rows)
@@ -80,6 +81,10 @@ def summarize(workload_dir: str, results_dir: str):
             errors=("error", "mean"),
             lat_p50=("latency_ms", "median"),
             lat_p95=("latency_ms", lambda s: s.quantile(0.95)),
+            routed_exact=(
+                "route",
+                lambda s: (s == "exact").mean() if s.notna().any() else float("nan"),
+            ),
         )
         .reset_index()
     )

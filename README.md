@@ -169,6 +169,8 @@ uv run oibench run      --data data/m1 --workload work/m1 --sweep sweep.example.
                         --out results/m1-a --methods exact hnsw prism
 uv run oibench run      --data data/m1 --workload work/m1 --sweep sweep.example.toml \
                         --out results/m1-a --methods hnsw_iter      # slow; same --out appends
+uv run oibench run      --data data/m1 --workload work/m1 --sweep sweep.example.toml \
+                        --out results/m1-a --methods routed_prism routed_hnsw
 uv run oibench plans    --workload work/m1 --results results/m1-a | tee results/m1-a/plans.txt
 uv run oibench report   --workload work/m1 --results results/m1-a   # report.md, summary.csv
 ```
@@ -201,6 +203,13 @@ already finished and drops the partial rows of an interrupted one. Check the
   `forced` mode (vector index only) and `planner` mode (Postgres may pick GIN + sort).
   Grouped queries run as `lateral` (one filtered subquery per group) and `overfetch:M`
   (top-M, then group in SQL). A method can narrow the query kinds it runs with `kinds`.
+- **Routed** (`routed_prism`, `routed_hnsw`; filter queries only): probe-then-route.
+  An unfiltered top-`probe` scan through the vector index counts how many of the query's
+  nearest neighbors pass the filter. That count estimates the filter's lift around this
+  query, which the planner can't see. If fewer than `factor` × k pass, the query runs on
+  the exact plan (`enable_indexscan = off`, so GIN + sort); otherwise it runs on the
+  index. Latency includes the probe. The report's `routed_exact` column is the share
+  sent to the exact plan.
 - **Report**: recall mean and 10th percentile, short-result rate, latency p50/p95 per
   config × cell. `explain.jsonl` keeps `EXPLAIN ANALYZE` plans; `oibench plans` summarizes
   which plan each config actually used.

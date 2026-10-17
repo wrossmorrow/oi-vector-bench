@@ -20,6 +20,9 @@ types:
 test:
     uv run --extra embed --extra bench python -m unittest discover -s tests
 
+notebook:
+    uv run --extra analysis --extra bench jupyter lab notebooks/results.ipynb
+
 lambda-ssh ip user=ssh_usr_lambda ssh_key=ssh_key_lambda:
     just ssh {{ip}} {{user}} {{ssh_key}}
 

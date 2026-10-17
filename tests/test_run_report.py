@@ -9,7 +9,15 @@ import unittest
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
 from oibench.report import score  # noqa: E402
-from oibench.run import cell_of, configs, plan_nodes, sql_for, strategies_for  # noqa: E402
+from oibench.run import (  # noqa: E402
+    cell_of,
+    configs,
+    plan_nodes,
+    probe_sql,
+    route_decision,
+    sql_for,
+    strategies_for,
+)
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 
@@ -28,6 +36,10 @@ class TestSweep(unittest.TestCase):
         self.assertEqual(len(by["hnsw"]), 3 * 2)  # ef_search x modes
         self.assertEqual(len(by["hnsw_iter"]), 1 * 2 * 2 * 2)  # ef x iter x max_tuples x modes
         self.assertTrue(all(c.kinds == frozenset({"filter", "diverse"}) for c in by["hnsw_iter"]))
+        self.assertEqual(len(by["routed_prism"]), 2)  # nprobe x planner only
+        self.assertEqual(len(by["routed_hnsw"]), 2)
+        self.assertTrue(all(c.kinds == frozenset({"filter"}) for c in by["routed_prism"]))
+        self.assertTrue(all("|router=factor=1.0,probe=200" in c.key for c in by["routed_prism"]))
         self.assertEqual(len(by["prism"]), 4 * 2)
         self.assertTrue(all(c.table == "m1_prism" for c in by["prism"]))
         self.assertEqual(by["exact"][0].gucs, {"enable_indexscan": "off"})
@@ -84,10 +96,29 @@ class TestResume(unittest.TestCase):
             with open(os.path.join(d, "results.jsonl")) as f:
                 keys = [json.loads(line)["config"] for line in f]
             self.assertNotIn(partial.key, keys)  # partial rows dropped
-            self.assertEqual(keys.count("old|forced|y=1"), 4)  # complete foreign config kept
-            self.assertNotIn("old|forced|y=2", keys)  # interrupted foreign config dropped
+            self.assertEqual(keys.count("old|forced|y=1"), 4)  # unknown configs never dropped
+            self.assertEqual(keys.count("old|forced|y=2"), 2)
             with open(os.path.join(d, "explain.jsonl")) as f:
                 self.assertEqual(len(f.readlines()), 1)
+            self.assertTrue(any(n.startswith("results.jsonl.bak-") for n in os.listdir(d)))
+
+    def test_resume_subset_of_methods(self):
+        """Running only some --methods must not judge the others (narrower kinds) as partial."""
+        import tempfile
+
+        from oibench.run import Config, resume_state
+
+        items = [{"qid": 0, "kind": "filter"}, {"qid": 1, "kind": "diverse"}, {"qid": 2, "kind": "group_label"}]
+        strat = {"group_label": ["lateral"], "diverse": ["overfetch:5"]}
+        narrow = Config("it", "t", {}, "forced", strat, frozenset({"filter", "diverse"}))  # 2 rows
+        routed = Config("r", "t", {}, "planner", strat, frozenset({"filter"}), {"probe": 200})
+        with tempfile.TemporaryDirectory() as d:
+            with open(os.path.join(d, "results.jsonl"), "w") as f:
+                f.writelines(json.dumps({"config": narrow.key}) + "\n" for _ in range(2))
+            done = resume_state(d, [routed], items, known=[narrow, routed])
+            self.assertEqual(done, set())
+            with open(os.path.join(d, "results.jsonl")) as f:
+                self.assertEqual(len(f.readlines()), 2)  # narrow config untouched
 
     def test_method_kinds(self):
         sweep = {
@@ -101,6 +132,31 @@ class TestResume(unittest.TestCase):
         cfgs = configs(sweep)
         self.assertEqual(cfgs[0].kinds, frozenset({"filter", "diverse"}))
         self.assertEqual([c.kinds for c in cfgs if c.method == "b"], [frozenset({"filter"})])
+
+
+class TestRouting(unittest.TestCase):
+    def test_decision(self):
+        self.assertEqual(route_decision(10, 10), "index")
+        self.assertEqual(route_decision(9, 10), "exact")
+        self.assertEqual(route_decision(0, 10), "exact")
+        self.assertEqual(route_decision(15, 10, factor=2.0), "exact")
+        self.assertEqual(route_decision(20, 10, factor=2.0), "index")
+
+    def test_probe_sql(self):
+        sql = probe_sql("m1_prism", 200)
+        self.assertIn("LIMIT 200", sql)
+        self.assertIn("count(*) FILTER (WHERE labels @> ARRAY[%(l)s]::int4[])", sql)
+        self.assertIn("ORDER BY embedding <=> %(q)s", sql)
+        self.assertNotIn("WHERE labels", sql.split("FROM (")[1].split(")")[0])  # probe itself is unfiltered
+
+    def test_router_key_and_rows(self):
+        from oibench.run import Config, expected_rows
+
+        a = Config("r", "t", {"x": 1}, "planner", {}, frozenset({"filter"}), {"probe": 200})
+        b = Config("r", "t", {"x": 1}, "planner", {}, frozenset({"filter"}), {"probe": 400})
+        self.assertNotEqual(a.key, b.key)
+        items = [{"kind": "filter"}, {"kind": "diverse"}, {"kind": "filter"}]
+        self.assertEqual(expected_rows(a, items), 2)
 
 
 class TestSQL(unittest.TestCase):

@@ -61,11 +61,15 @@ class Config:
     mode: str
     strategies: dict = field(default_factory=dict)
     kinds: frozenset = frozenset({"filter", "group_label", "diverse"})
+    router: dict | None = None  # probe-then-route for filter queries; see run_routed
 
     @property
     def key(self) -> str:
         g = ",".join(f"{k}={v}" for k, v in sorted(self.gucs.items()))
-        return f"{self.method}|{self.mode}|{g}"
+        key = f"{self.method}|{self.mode}|{g}"
+        if self.router:
+            key += "|router=" + ",".join(f"{k}={v}" for k, v in sorted(self.router.items()))
+        return key
 
 
 def configs(sweep: dict) -> list[Config]:
@@ -88,6 +92,7 @@ def configs(sweep: dict) -> list[Config]:
                         mode,
                         sweep.get("strategies", {}),
                         frozenset(m.get("kinds", default_kinds)),
+                        m.get("router"),
                     )
                 )
     return out
@@ -98,43 +103,46 @@ def expected_rows(cfg: Config, items: list[dict]) -> int:
     return sum(len(strategies_for(w, cfg)) for w in items if w["kind"] in cfg.kinds)
 
 
-def resume_state(out_dir: str, cfgs: list[Config], items: list[dict]) -> set[str]:
-    """Config keys already complete in out_dir. Rows of incomplete configs
-    (an interrupted run) are dropped from results.jsonl / explain.jsonl, so a
-    rerun of the same command picks up where it stopped without duplicates.
-    Works on runs made before this existed: completeness is a row count."""
+def resume_state(out_dir: str, cfgs: list[Config], items: list[dict], known: list[Config] | None = None) -> set[str]:
+    """Config keys of `cfgs` already complete in out_dir.
+
+    Rows of incomplete configs (an interrupted run) are dropped from results.jsonl /
+    explain.jsonl, so a rerun of the same command picks up where it stopped without
+    duplicates. Completeness is a row count against each config's own expected rows.
+    `known` is every config in the sweep file (not just the --methods being run), so a
+    method with narrower `kinds` is judged by its own kinds. Rows of configs the sweep
+    doesn't know are never dropped, only reported. The originals are backed up first."""
     res_path = os.path.join(out_dir, "results.jsonl")
     if not os.path.exists(res_path):
         return set()
-    with open(res_path) as f:
-        rows = f.readlines()
     counts: dict = {}
-    for line in rows:
-        k = json.loads(line)["config"]
-        counts[k] = counts.get(k, 0) + 1
-    want = {c.key: expected_rows(c, items) for c in cfgs}
-    # Configs not in this sweep (e.g. from an older sweep file) are kept if they
-    # look complete for all kinds with this sweep's strategies; otherwise they
-    # were interrupted and are dropped like any other partial config.
-    default = Config("?", "?", {}, "?", cfgs[0].strategies if cfgs else {})
-    want_foreign = expected_rows(default, items)
-    done = {k for k, n in counts.items() if n >= want.get(k, want_foreign)}
-    partial = set(counts) - done
+    with open(res_path) as f:
+        for line in f:
+            k = json.loads(line)["config"]
+            counts[k] = counts.get(k, 0) + 1
+    want = {c.key: expected_rows(c, items) for c in (known or []) + cfgs}
+    unknown = sorted(k for k in counts if k not in want)
+    if unknown:
+        print(f"keeping rows of {len(unknown)} config(s) not in this sweep: {unknown}", file=sys.stderr)
+    done = {k for k, n in counts.items() if k in want and n >= want[k]}
+    partial = {k for k in counts if k in want and k not in done}
     if partial:
         print(
             f"dropping partial rows of {len(partial)} interrupted config(s): {sorted(partial)}",
             file=sys.stderr,
         )
+        stamp = time.strftime("%Y%m%d-%H%M%S")
         for name in ("results.jsonl", "explain.jsonl"):
             path = os.path.join(out_dir, name)
             if not os.path.exists(path):
                 continue
+            shutil.copyfile(path, f"{path}.bak-{stamp}")
             with open(path) as f:
                 keep = [line for line in f if json.loads(line)["config"] not in partial]
             with open(path + ".tmp", "w") as f:
                 f.writelines(keep)
             os.replace(path + ".tmp", path)
-    return done & set(want)
+    return done & {c.key for c in cfgs}
 
 
 # --------------------------------------------------------------------------- SQL
@@ -222,6 +230,45 @@ def plan_nodes(plan: dict) -> list[str]:
     return out
 
 
+# --------------------------------------------------------------------------- routing
+
+
+def probe_sql(table: str, n: int) -> str:
+    """How many of the query's n nearest neighbours (unfiltered, via the vector
+    index) pass the filter, and how many rows the index returned at all (HNSW
+    returns at most ef_search)."""
+    return (
+        "SELECT count(*) FILTER (WHERE labels @> ARRAY[%(l)s]::int4[]), count(*) "
+        f"FROM (SELECT labels FROM {table} ORDER BY embedding <=> %(q)s LIMIT {int(n)}) p"
+    )
+
+
+def route_decision(matches: int, k: int, factor: float = 1.0) -> str:
+    """'index' if the probe already saw enough matching rows near the query for a
+    post-filtered index scan to fill k; otherwise 'exact' (label index + sort).
+
+    This measures the filter's lift around this particular query, which the
+    planner can't see: it only knows the label's overall selectivity."""
+    return "index" if matches >= factor * k else "exact"
+
+
+def run_routed(conn, cfg: Config, item: dict, params: dict) -> tuple[list, dict]:
+    """Probe, decide, then run the filter query on the chosen plan. The caller
+    times the whole thing, so latency includes the probe."""
+    n = int(cfg.router.get("probe", 200))
+    factor = float(cfg.router.get("factor", 1.0))
+    matches, returned = conn.execute(probe_sql(cfg.table, n), params).fetchone()
+    route = route_decision(matches, int(item["k"]), factor)
+    sql, _ = sql_for(item, cfg.table, None)
+    if route == "exact":
+        with conn.transaction():  # SET LOCAL reverts at commit
+            conn.execute("SET LOCAL enable_indexscan = off")
+            rows = conn.execute(sql, params).fetchall()
+    else:
+        rows = conn.execute(sql, params).fetchall()
+    return rows, {"route": route, "probe_matches": matches, "probe_rows": returned}
+
+
 # --------------------------------------------------------------------------- run
 
 
@@ -280,8 +327,9 @@ def run(
     explain_n = int(sweep.get("explain_per_cell", 3))
     timeout = sweep.get("statement_timeout", "60s")
 
-    cfgs = [c for c in configs(sweep) if not only_methods or c.method in only_methods]
-    done = resume_state(out_dir, cfgs, items)
+    all_cfgs = configs(sweep)
+    cfgs = [c for c in all_cfgs if not only_methods or c.method in only_methods]
+    done = resume_state(out_dir, cfgs, items, known=all_cfgs)
     if done:
         print(
             f"resuming: {len(done)} config(s) already complete, skipping them",
@@ -324,7 +372,11 @@ def run(
                 }
                 t0 = time.perf_counter()
                 try:
-                    rows = conn.execute(sql, params).fetchall()
+                    if cfg.router and item["kind"] == "filter":
+                        rows, info = run_routed(conn, cfg, item, params)
+                        row.update(info)
+                    else:
+                        rows = conn.execute(sql, params).fetchall()
                     row["latency_ms"] = (time.perf_counter() - t0) * 1000
                     if item["kind"] == "group_label":
                         groups: dict = {}
@@ -340,7 +392,8 @@ def run(
                 res_f.write(json.dumps(row) + "\n")
 
                 ckey = (cell_of(item), strategy)
-                if explained.get(ckey, 0) < explain_n and "error" not in row:
+                # routed queries are several statements; EXPLAIN of one would mislead
+                if explained.get(ckey, 0) < explain_n and "error" not in row and not cfg.router:
                     explained[ckey] = explained.get(ckey, 0) + 1
                     try:
                         plan = conn.execute(
