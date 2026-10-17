@@ -1,10 +1,10 @@
 """oibench command line.
 
-  oibench export   --lake s3://.../oi --sample mirror_1m --queries queries --out data/m1
-  oibench workload --data data/m1 --out work/m1 [--n-per-cell 50]
-  oibench load     --data data/m1 --dsn postgresql://... --prefix m1
-  oibench run      --data data/m1 --workload work/m1 --sweep sweep.toml --out results/m1-a --dsn ...
-  oibench report   --workload work/m1 --results results/m1-a
+oibench export   --lake s3://.../oi --sample mirror_1m --queries queries --out data/m1
+oibench workload --data data/m1 --out work/m1 [--n-per-cell 50]
+oibench load     --data data/m1 --dsn postgresql://... --prefix m1
+oibench run      --data data/m1 --workload work/m1 --sweep sweep.toml --out results/m1-a --dsn ...
+oibench report   --workload work/m1 --results results/m1-a
 """
 
 from __future__ import annotations
@@ -26,8 +26,11 @@ def main(argv: list[str] | None = None) -> None:
     p.add_argument("--model", default="pe-core-l14-336")
     p.add_argument("--out", required=True)
     p.add_argument("--no-expand", action="store_true", help="don't add hierarchy ancestors")
-    p.add_argument("--machine-threshold", type=float,
-                   help="also use machine labels with confidence >= this")
+    p.add_argument(
+        "--machine-threshold",
+        type=float,
+        help="also use machine labels with confidence >= this",
+    )
 
     p = sub.add_parser("synth", help="synthetic dataset for testing the Postgres path")
     p.add_argument("--out", required=True)
@@ -75,16 +78,26 @@ def main(argv: list[str] | None = None) -> None:
         from oilake.lake import Lake
 
         from .export import export
-        export(Lake.from_root(a.lake), a.out, sample=a.sample, queries=a.queries,
-               model_id=a.model, expand=not a.no_expand, machine_threshold=a.machine_threshold)
+
+        export(
+            Lake.from_root(a.lake),
+            a.out,
+            sample=a.sample,
+            queries=a.queries,
+            model_id=a.model,
+            expand=not a.no_expand,
+            machine_threshold=a.machine_threshold,
+        )
     elif a.cmd == "synth":
         from .synth import synthetic
+
         ds = synthetic(n=a.n, q=a.queries, d=a.dim, n_labels=a.labels, n_clusters=20)
         ds.save(a.out)
         print(f"synthetic {ds.n:,} x {ds.dim} -> {a.out}")
     elif a.cmd == "workload":
         from .data import Dataset
         from .workload import Spec, generate, write
+
         spec = Spec(ks=a.ks, n_per_cell=a.n_per_cell, group_sizes=a.group_sizes, seed=a.seed)
         wl, tr = generate(Dataset.load(a.data, mmap=False), spec)
         write(a.out, spec, wl, tr)
@@ -92,18 +105,28 @@ def main(argv: list[str] | None = None) -> None:
     elif a.cmd == "load":
         from .data import Dataset
         from .pg import load
-        stats = load(a.dsn, a.prefix, Dataset.load(a.data), hnsw_m=a.hnsw_m,
-                     hnsw_ef_construction=a.hnsw_ef_construction, parallel_workers=a.workers)
+
+        stats = load(
+            a.dsn,
+            a.prefix,
+            Dataset.load(a.data),
+            hnsw_m=a.hnsw_m,
+            hnsw_ef_construction=a.hnsw_ef_construction,
+            parallel_workers=a.workers,
+        )
         with open(os.path.join(a.data, f"load-{a.prefix}.json"), "w") as f:
             json.dump(stats, f, indent=2, default=str)
     elif a.cmd == "run":
         from .run import run
+
         run(a.dsn, a.data, a.workload, a.sweep, a.out, a.methods, a.limit, a.prefix)
     elif a.cmd == "report":
         from .report import write
+
         write(a.workload, a.results)
     elif a.cmd == "plans":
         from .report import plan_summary
+
         for cfg, kind, plan, n in plan_summary(a.workload, a.results):
             print(f"{n:5d}  {cfg:16s} {kind:28s} {plan}")
 

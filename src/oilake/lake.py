@@ -21,7 +21,7 @@ class Lake:
     storage_options: dict = field(default_factory=dict)
 
     @classmethod
-    def from_root(cls, root: str) -> "Lake":
+    def from_root(cls, root: str) -> Lake:
         root = root.rstrip("/")
         opts: dict = {}
         if root.startswith("s3://"):
@@ -53,10 +53,10 @@ class Lake:
         if self.is_s3:
             region = self.storage_options.get("AWS_REGION")
             fs = pafs.S3FileSystem(region=region) if region else pafs.S3FileSystem()
-            return fs, self.root[len("s3://"):]
+            return fs, self.root[len("s3://") :]
         os.makedirs(self.root, exist_ok=True)
         return pafs.LocalFileSystem(), os.path.abspath(self.root)
 
     def fs_path(self, uri: str) -> str:
         """Convert a lake URI to a path for `filesystem()`."""
-        return uri[len("s3://"):] if uri.startswith("s3://") else os.path.abspath(uri)
+        return uri[len("s3://") :] if uri.startswith("s3://") else os.path.abspath(uri)

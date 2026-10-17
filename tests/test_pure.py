@@ -7,19 +7,31 @@ import unittest
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
 from oilake.hierarchy import ROOT_ENTITY, closure  # noqa: E402
-from oilake.keys import (chunk_units, parse_rotation, parse_worker, sample_key,  # noqa: E402
-                         unit_name, units_for_worker)
+from oilake.keys import (
+    chunk_units,
+    parse_rotation,
+    parse_worker,
+    sample_key,  # noqa: E402
+    unit_name,
+    units_for_worker,
+)
 
 TREE = {
     "LabelName": ROOT_ENTITY,
     "Subcategory": [
-        {"LabelName": "animal", "Subcategory": [
-            {"LabelName": "dog"},
-            {"LabelName": "cat"},
-            {"LabelName": "pet", "Subcategory": [{"LabelName": "dog"}]},
-        ]},
-        {"LabelName": "vehicle", "Subcategory": [{"LabelName": "car"}],
-         "Part": [{"LabelName": "wheel"}]},
+        {
+            "LabelName": "animal",
+            "Subcategory": [
+                {"LabelName": "dog"},
+                {"LabelName": "cat"},
+                {"LabelName": "pet", "Subcategory": [{"LabelName": "dog"}]},
+            ],
+        },
+        {
+            "LabelName": "vehicle",
+            "Subcategory": [{"LabelName": "car"}],
+            "Part": [{"LabelName": "wheel"}],
+        },
     ],
 }
 

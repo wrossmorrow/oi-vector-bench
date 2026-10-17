@@ -24,7 +24,7 @@ class Exact:
         e = np.asarray(emb16, dtype=np.float32)
         norms = np.linalg.norm(e, axis=1, keepdims=True)
         norms[norms == 0] = 1.0
-        self.emb = e / norms                         # unit rows of the fp16-rounded vectors
+        self.emb = e / norms  # unit rows of the fp16-rounded vectors
         self.n = e.shape[0]
 
     # ------------------------------------------------------------- primitives
@@ -33,7 +33,7 @@ class Exact:
         """cos(q, item) for items `idx`, gathered in chunks to bound memory."""
         out = np.empty(len(idx), dtype=np.float32)
         for s in range(0, len(idx), _CHUNK):
-            out[s:s + _CHUNK] = self.emb[idx[s:s + _CHUNK]] @ q
+            out[s : s + _CHUNK] = self.emb[idx[s : s + _CHUNK]] @ q
         return out
 
     @staticmethod
@@ -42,7 +42,7 @@ class Exact:
         if k == 0:
             return ids[:0], sims[:0].astype(np.float32)
         part = np.argpartition(-sims, k - 1)[:k] if k < len(ids) else np.arange(len(ids))
-        order = part[np.lexsort((ids[part], -sims[part]))]   # by distance, then id
+        order = part[np.lexsort((ids[part], -sims[part]))]  # by distance, then id
         return ids[order], (1.0 - sims[order]).astype(np.float32)
 
     def topk(self, q: np.ndarray, k: int, idx: np.ndarray | None = None):
@@ -69,23 +69,22 @@ class Exact:
         Qn = np.stack([as_query(q) for q in Q])
         out = np.empty((len(Qn), k), dtype=np.int64)
         for b in range(0, len(Qn), batch):
-            qb = Qn[b:b + batch]
+            qb = Qn[b : b + batch]
             best_ids = np.zeros((len(qb), 0), dtype=np.int64)
             best_sims = np.zeros((len(qb), 0), dtype=np.float32)
             for s in range(0, self.n, _CHUNK * 2):
-                block = self.emb[s:s + _CHUNK * 2] @ qb.T          # (chunk, B)
+                block = self.emb[s : s + _CHUNK * 2] @ qb.T  # (chunk, B)
                 ids = np.arange(s, s + block.shape[0])
                 kk = min(k, block.shape[0])
                 p = np.argpartition(-block, kk - 1, axis=0)[:kk].T  # (B, kk)
                 cand_ids = np.concatenate([best_ids, ids[p]], axis=1)
-                cand_sims = np.concatenate(
-                    [best_sims, np.take_along_axis(block.T, p, axis=1)], axis=1)
+                cand_sims = np.concatenate([best_sims, np.take_along_axis(block.T, p, axis=1)], axis=1)
                 kk2 = min(k, cand_ids.shape[1])
                 p2 = np.argpartition(-cand_sims, kk2 - 1, axis=1)[:, :kk2]
                 best_ids = np.take_along_axis(cand_ids, p2, axis=1)
                 best_sims = np.take_along_axis(cand_sims, p2, axis=1)
             order = np.argsort(-best_sims, axis=1, kind="stable")
-            out[b:b + len(qb)] = np.take_along_axis(best_ids, order, axis=1)
+            out[b : b + len(qb)] = np.take_along_axis(best_ids, order, axis=1)
         return out
 
     # ------------------------------------------------------------- query types
@@ -98,13 +97,20 @@ class Exact:
         """Top-n per group (label -> its items)."""
         return {g: self.topk(q, n, items)[0].tolist() for g, items in groups.items()}
 
-    def diverse(self, q, k: int, cap: int, author: np.ndarray,
-                candidates: np.ndarray | None = None) -> tuple[list[int], bool]:
+    def diverse(
+        self,
+        q,
+        k: int,
+        cap: int,
+        author: np.ndarray,
+        candidates: np.ndarray | None = None,
+    ) -> tuple[list[int], bool]:
         """Top-k with at most `cap` items per author, greedy in distance order.
 
         `candidates` (nearest first) avoids a full scan; if it runs out before
         k picks, falls back to the full ordering. Returns (ids, used_fallback).
         """
+
         def greedy(order):
             seen: dict[int, int] = {}
             picked = []

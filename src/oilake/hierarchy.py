@@ -8,7 +8,7 @@ DAG; we keep the shortest depth per (ancestor, descendant) pair.
 
 from __future__ import annotations
 
-from typing import Iterator
+from collections.abc import Iterator
 
 ROOT_ENTITY = "/m/0bl9f"  # synthetic "Entity" root; not a real label
 

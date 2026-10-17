@@ -14,16 +14,24 @@ import pyarrow.compute as pc
 
 from .lake import Lake
 
-SAMPLES_SCHEMA = pa.schema([
-    ("sample_name", pa.string()),
-    ("model_id", pa.string()),
-    ("image_id", pa.string()),
-    ("rank", pa.int64()),          # position in sample_key order
-])
+SAMPLES_SCHEMA = pa.schema(
+    [
+        ("sample_name", pa.string()),
+        ("model_id", pa.string()),
+        ("image_id", pa.string()),
+        ("rank", pa.int64()),  # position in sample_key order
+    ]
+)
 
 
-def choose(images: pa.Table, embedded_ok: pa.Array, n: int | None, *, tail: bool = False,
-           exclude: pa.Array | None = None) -> pa.Table:
+def choose(
+    images: pa.Table,
+    embedded_ok: pa.Array,
+    n: int | None,
+    *,
+    tail: bool = False,
+    exclude: pa.Array | None = None,
+) -> pa.Table:
     """images: image_id, sample_key. Returns image_id, rank for the first n eligible.
 
     tail=True takes the LAST n in sample_key order instead. That is how the
@@ -40,8 +48,7 @@ def choose(images: pa.Table, embedded_ok: pa.Array, n: int | None, *, tail: bool
         if t.num_rows < n:
             raise SystemExit(f"only {t.num_rows:,} eligible images, asked for {n:,}")
         t = t.slice(0, n)
-    return pa.table({"image_id": t["image_id"],
-                     "rank": pa.array(range(t.num_rows), pa.int64())})
+    return pa.table({"image_id": t["image_id"], "rank": pa.array(range(t.num_rows), pa.int64())})
 
 
 def read_sample_ids(lake: Lake, name: str) -> pa.Table:
@@ -55,28 +62,48 @@ def read_sample_ids(lake: Lake, name: str) -> pa.Table:
     return t.sort_by("rank")
 
 
-def build_sample(lake: Lake, model_id: str, name: str, n: int | None, *, tail: bool = False,
-                 exclude: str | None = None) -> None:
+def build_sample(
+    lake: Lake,
+    model_id: str,
+    name: str,
+    n: int | None,
+    *,
+    tail: bool = False,
+    exclude: str | None = None,
+) -> None:
     from deltalake import DeltaTable, write_deltalake
 
     opts = lake.storage_options
     emb = DeltaTable(lake.table("embeddings"), storage_options=opts).to_pyarrow_dataset()
-    ok = emb.to_table(columns=["image_id"],
-                      filter=(pc.field("model_id") == model_id) & pc.field("error").is_null())
-    images = DeltaTable(lake.table("images"), storage_options=opts).to_pyarrow_dataset().to_table(
-        columns=["image_id", "sample_key"], filter=pc.field("in_s3_mirror"))
+    ok = emb.to_table(
+        columns=["image_id"],
+        filter=(pc.field("model_id") == model_id) & pc.field("error").is_null(),
+    )
+    images = (
+        DeltaTable(lake.table("images"), storage_options=opts)
+        .to_pyarrow_dataset()
+        .to_table(columns=["image_id", "sample_key"], filter=pc.field("in_s3_mirror"))
+    )
     excl = read_sample_ids(lake, exclude)["image_id"].combine_chunks() if exclude else None
     chosen = choose(images, ok["image_id"].combine_chunks(), n, tail=tail, exclude=excl)
-    out = pa.table({
-        "sample_name": pa.array([name] * chosen.num_rows, pa.string()),
-        "model_id": pa.array([model_id] * chosen.num_rows, pa.string()),
-        "image_id": chosen["image_id"],
-        "rank": chosen["rank"],
-    }, schema=SAMPLES_SCHEMA)
+    out = pa.table(
+        {
+            "sample_name": pa.array([name] * chosen.num_rows, pa.string()),
+            "model_id": pa.array([model_id] * chosen.num_rows, pa.string()),
+            "image_id": chosen["image_id"],
+            "rank": chosen["rank"],
+        },
+        schema=SAMPLES_SCHEMA,
+    )
 
     uri = lake.table("samples")
     exists = DeltaTable.is_deltatable(uri, storage_options=opts)
-    write_deltalake(uri, out, mode="overwrite", partition_by=["sample_name"],
-                    predicate=f"sample_name = '{name}'" if exists else None,
-                    storage_options=opts)
+    write_deltalake(
+        uri,
+        out,
+        mode="overwrite",
+        partition_by=["sample_name"],
+        predicate=f"sample_name = '{name}'" if exists else None,
+        storage_options=opts,
+    )
     print(f"sample {name}: {out.num_rows:,} images -> {uri}", file=sys.stderr)

@@ -7,6 +7,13 @@ ssh_usr_aws := "ec2-user"
 default:
     just --list
 
+format: 
+    uv run ruff format .
+    uv run ruff check --fix .
+
+check:
+    uv run ruff format --check .
+
 lambda-ssh ip user=ssh_usr_lambda ssh_key=ssh_key_lambda:
     just ssh {{ip}} {{user}} {{ssh_key}}
 

@@ -30,8 +30,11 @@ def list_keys(n: int) -> list[str]:
     from botocore import UNSIGNED
     from botocore.config import Config
 
-    s3 = boto3.client("s3", region_name=sources.MIRROR_REGION,
-                      config=Config(signature_version=UNSIGNED))
+    s3 = boto3.client(
+        "s3",
+        region_name=sources.MIRROR_REGION,
+        config=Config(signature_version=UNSIGNED),
+    )
     keys, token = [], None
     while len(keys) < n:
         kw = {"Bucket": sources.MIRROR_BUCKET, "Prefix": "validation/", "MaxKeys": 1000}
@@ -62,8 +65,10 @@ def main() -> None:
         blobs = list(pool.map(fetch, keys))
     dt = time.time() - t0
     mb = sum(map(len, blobs)) / 1e6
-    print(f"fetch:  {len(blobs) / dt:7.0f} img/s  {mb / dt:6.0f} MB/s  "
-          f"({a.fetch_threads} threads, avg {mb / len(blobs) * 1000:.0f} KB/img)")
+    print(
+        f"fetch:  {len(blobs) / dt:7.0f} img/s  {mb / dt:6.0f} MB/s  "
+        f"({a.fetch_threads} threads, avg {mb / len(blobs) * 1000:.0f} KB/img)"
+    )
 
     # 2. decode + preprocess, single process
     import torch
@@ -75,12 +80,13 @@ def main() -> None:
         enc.preprocess(decode(b, None, False))
     per_proc = len(sample) / (time.time() - t0)
     cpus = os.cpu_count() or 1
-    print(f"decode: {per_proc:7.0f} img/s per process -> ~{per_proc * (cpus - 2):.0f} img/s "
-          f"with {cpus - 2} workers ({cpus} vCPUs)")
+    print(
+        f"decode: {per_proc:7.0f} img/s per process -> ~{per_proc * (cpus - 2):.0f} img/s "
+        f"with {cpus - 2} workers ({cpus} vCPUs)"
+    )
 
     # 3. GPU encode
-    print(f"device: {enc.device}"
-          + (f" ({torch.cuda.get_device_name()})" if enc.device == "cuda" else ""))
+    print(f"device: {enc.device}" + (f" ({torch.cuda.get_device_name()})" if enc.device == "cuda" else ""))
     for bs in (256, 512):
         x = torch.randn(bs, 3, IMAGE_SIZE, IMAGE_SIZE)
         enc.encode(x)  # warmup

@@ -28,7 +28,7 @@ import numpy as np
 
 @dataclass
 class CSR:
-    indptr: np.ndarray   # (n_rows + 1,) int64
+    indptr: np.ndarray  # (n_rows + 1,) int64
     indices: np.ndarray  # (nnz,) int32
 
     @property
@@ -36,17 +36,17 @@ class CSR:
         return len(self.indptr) - 1
 
     def row(self, i: int) -> np.ndarray:
-        return self.indices[self.indptr[i]:self.indptr[i + 1]]
+        return self.indices[self.indptr[i] : self.indptr[i + 1]]
 
     @classmethod
-    def from_lists(cls, rows) -> "CSR":
+    def from_lists(cls, rows) -> CSR:
         lens = np.fromiter((len(r) for r in rows), dtype=np.int64)
         indptr = np.concatenate([[0], np.cumsum(lens)]).astype(np.int64)
         flat = [x for r in rows for x in r]
         return cls(indptr, np.asarray(flat, dtype=np.int32))
 
     @classmethod
-    def from_pairs(cls, rows: np.ndarray, cols: np.ndarray, n_rows: int) -> "CSR":
+    def from_pairs(cls, rows: np.ndarray, cols: np.ndarray, n_rows: int) -> CSR:
         """Build from (row, col) pairs; duplicates removed, cols sorted per row."""
         rows = np.asarray(rows, dtype=np.int64)
         cols = np.asarray(cols, dtype=np.int64)
@@ -58,7 +58,7 @@ class CSR:
         indptr = np.concatenate([[0], np.cumsum(counts)]).astype(np.int64)
         return cls(indptr, cols.astype(np.int32))
 
-    def inverted(self, n_cols: int) -> "CSR":
+    def inverted(self, n_cols: int) -> CSR:
         """Column -> sorted row ids (label -> items)."""
         row_of = np.repeat(np.arange(self.n_rows, dtype=np.int64), np.diff(self.indptr))
         order = np.argsort(self.indices, kind="stable")
@@ -71,7 +71,7 @@ class CSR:
         np.save(prefix + "_indices.npy", self.indices)
 
     @classmethod
-    def load(cls, prefix: str) -> "CSR":
+    def load(cls, prefix: str) -> CSR:
         return cls(np.load(prefix + "_indptr.npy"), np.load(prefix + "_indices.npy"))
 
 
@@ -127,7 +127,7 @@ class Dataset:
             json.dump(meta, f, indent=2)
 
     @classmethod
-    def load(cls, d: str, mmap: bool = True) -> "Dataset":
+    def load(cls, d: str, mmap: bool = True) -> Dataset:
         mode = "r" if mmap else None
         classes = []
         with open(os.path.join(d, "classes.tsv")) as f:

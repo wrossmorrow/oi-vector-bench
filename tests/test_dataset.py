@@ -40,8 +40,8 @@ class TestUnitDataset(unittest.TestCase):
     def test_batch_fetch_isolates_errors_and_rotates(self):
         out = self._ds().__getitems__([0, 1, 2, 3])
         self.assertEqual([i for _, i, _ in out], [0, 1, 2, 3])
-        self.assertEqual(out[0][0], (20, 40))       # rotated 90 -> portrait
-        self.assertEqual(out[3][0], (40, 20))       # rotation unknown -> untouched
+        self.assertEqual(out[0][0], (20, 40))  # rotated 90 -> portrait
+        self.assertEqual(out[3][0], (40, 20))  # rotation unknown -> untouched
         self.assertIsNone(out[1][0])
         self.assertIn("UnidentifiedImageError", out[1][2])
         self.assertIsNone(out[2][0])
@@ -52,7 +52,7 @@ class TestUnitDataset(unittest.TestCase):
 
     def test_picklable_after_use(self):
         ds = self._ds()
-        ds.__getitems__([0])                         # creates the thread pool
+        ds.__getitems__([0])  # creates the thread pool
         clone = pickle.loads(pickle.dumps(ds))
         self.assertEqual(clone[0][0], (20, 40))
 
@@ -60,7 +60,7 @@ class TestUnitDataset(unittest.TestCase):
         from oilake.embed import S3MirrorFetcher
 
         f = S3MirrorFetcher()
-        f._client = object()                         # stand-in for a live boto3 client
+        f._client = object()  # stand-in for a live boto3 client
         self.assertIsNone(pickle.loads(pickle.dumps(f))._client)
 
 

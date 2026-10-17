@@ -6,7 +6,7 @@ No third-party imports, so these are testable anywhere.
 from __future__ import annotations
 
 import hashlib
-from typing import Iterable, Sequence
+from collections.abc import Iterable, Sequence
 
 _SAMPLE_SALT = b"oilake-sample-v1"
 
@@ -62,8 +62,7 @@ def parse_worker(spec: str) -> tuple[int, int]:
     return k, n
 
 
-def units_for_worker(unit_indices: Iterable[int], worker: tuple[int, int],
-                     done: Sequence[str] = ()) -> list[int]:
+def units_for_worker(unit_indices: Iterable[int], worker: tuple[int, int], done: Sequence[str] = ()) -> list[int]:
     """Units this worker should still run (skips ones already written)."""
     k, n = worker
     done_set = set(done)

@@ -79,8 +79,15 @@ class TestWorkload(unittest.TestCase):
 
     def test_generate_and_roundtrip(self):
         ds = synthetic()
-        spec = Spec(ks=[5, 20], n_per_cell=6, log10_bottom=-3, group_sizes=[3],
-                    group_n=2, diverse_caps=[1], lift_top=200)
+        spec = Spec(
+            ks=[5, 20],
+            n_per_cell=6,
+            log10_bottom=-3,
+            group_sizes=[3],
+            group_n=2,
+            diverse_caps=[1],
+            lift_top=200,
+        )
         wl, tr = generate(ds, spec, log=lambda *a: None)
         self.assertEqual([w["qid"] for w in wl], list(range(len(wl))))
         ex = Exact(ds.emb)
@@ -88,7 +95,7 @@ class TestWorkload(unittest.TestCase):
         kinds = {w["kind"] for w in wl}
         self.assertEqual(kinds, {"filter", "group_label", "diverse"})
         lifts = {"pos": [], "neg": []}
-        for w, t in zip(wl, tr):
+        for w, t in zip(wl, tr, strict=True):
             if w["kind"] == "filter":
                 L = w["labels"][0]
                 items = inv.row(L)

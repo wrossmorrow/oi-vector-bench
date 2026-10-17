@@ -11,7 +11,7 @@ Labels for items:
 from __future__ import annotations
 
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import numpy as np
 
@@ -40,8 +40,11 @@ def _embeddings(lake: Lake, model_id: str, image_ids: list[str], dim_hint: int |
     out = None
     found = np.zeros(len(image_ids), dtype=bool)
     ds = _delta(lake, "embeddings")
-    flt = (pc.field("model_id") == model_id) & pc.field("error").is_null() & \
-        pc.field("image_id").isin(pa.array(image_ids))
+    flt = (
+        (pc.field("model_id") == model_id)
+        & pc.field("error").is_null()
+        & pc.field("image_id").isin(pa.array(image_ids))
+    )
     for batch in ds.to_batches(columns=["image_id", "embedding"], filter=flt):
         if batch.num_rows == 0:
             continue
@@ -59,8 +62,14 @@ def _embeddings(lake: Lake, model_id: str, image_ids: list[str], dim_hint: int |
     return out
 
 
-def _labels(lake: Lake, image_ids: list[str], label_id: dict, closure: dict | None,
-            positive: bool, machine_threshold: float | None) -> CSR:
+def _labels(
+    lake: Lake,
+    image_ids: list[str],
+    label_id: dict,
+    closure: dict | None,
+    positive: bool,
+    machine_threshold: float | None,
+) -> CSR:
     import pyarrow as pa
     import pyarrow.compute as pc
 
@@ -70,8 +79,7 @@ def _labels(lake: Lake, image_ids: list[str], label_id: dict, closure: dict | No
     conf = 1.0 if positive else 0.0
     filters = [(pc.field("kind") == "human") & (pc.field("confidence") == conf)]
     if positive and machine_threshold is not None:
-        filters.append((pc.field("kind") == "machine") &
-                       (pc.field("confidence") >= machine_threshold))
+        filters.append((pc.field("kind") == "machine") & (pc.field("confidence") >= machine_threshold))
     rows, cols = [], []
     for f in filters:
         t = ds.to_table(columns=["image_id", "label"], filter=f & pc.field("image_id").isin(ids))
@@ -97,28 +105,43 @@ def _labels(lake: Lake, image_ids: list[str], label_id: dict, closure: dict | No
     return CSR.from_pairs(rows_a, cols_a, len(image_ids))
 
 
-def export(lake: Lake, out_dir: str, *, sample: str, queries: str, model_id: str,
-           expand: bool = True, machine_threshold: float | None = None) -> None:
+def export(
+    lake: Lake,
+    out_dir: str,
+    *,
+    sample: str,
+    queries: str,
+    model_id: str,
+    expand: bool = True,
+    machine_threshold: float | None = None,
+) -> None:
     import pyarrow.compute as pc
 
     item_ids = read_sample_ids(lake, sample)["image_id"].to_pylist()
     q_ids = read_sample_ids(lake, queries)["image_id"].to_pylist()
     overlap = set(item_ids) & set(q_ids)
     if overlap:
-        raise SystemExit(f"{len(overlap)} query images are also in {sample!r}; "
-                         f"rebuild {sample!r} with --exclude {queries}")
+        raise SystemExit(
+            f"{len(overlap)} query images are also in {sample!r}; rebuild {sample!r} with --exclude {queries}"
+        )
     _log(f"{len(item_ids):,} items from {sample!r}, {len(q_ids):,} queries from {queries!r}")
 
     classes_t = _delta(lake, "classes").to_table().sort_by("label_id")
-    classes = list(zip(classes_t["label_id"].to_pylist(), classes_t["label"].to_pylist(),
-                       classes_t["display_name"].to_pylist()))
+    classes = list(
+        zip(
+            classes_t["label_id"].to_pylist(),
+            classes_t["label"].to_pylist(),
+            classes_t["display_name"].to_pylist(),
+            strict=True,
+        )
+    )
     label_id = {mid: i for i, mid, _ in classes}
 
     closure = None
     if expand:
         clo = _delta(lake, "class_closure").to_table()
         closure = {}
-        for a, d in zip(clo["ancestor"].to_pylist(), clo["descendant"].to_pylist()):
+        for a, d in zip(clo["ancestor"].to_pylist(), clo["descendant"].to_pylist(), strict=True):
             if a in label_id and d in label_id:
                 closure.setdefault(label_id[d], []).append(label_id[a])
 
@@ -136,23 +159,36 @@ def export(lake: Lake, out_dir: str, *, sample: str, queries: str, model_id: str
     _log("authors")
     img = _delta(lake, "images").to_table(
         columns=["image_id", "author_profile_url"],
-        filter=pc.field("image_id").isin(item_ids))
-    url_of = dict(zip(img["image_id"].to_pylist(), img["author_profile_url"].to_pylist()))
+        filter=pc.field("image_id").isin(item_ids),
+    )
+    url_of = dict(zip(img["image_id"].to_pylist(), img["author_profile_url"].to_pylist(), strict=True))
     codes: dict = {}
     author = np.empty(len(item_ids), dtype=np.int64)
     for i, iid in enumerate(item_ids):
         u = url_of.get(iid)
         author[i] = codes.setdefault(u, len(codes)) if u else -(i + 1)
 
-    ds = Dataset(emb=emb, labels=labels, author=author, image_ids=item_ids,
-                 q_emb=q_emb, q_pos=q_pos, q_neg=q_neg, q_image_ids=q_ids,
-                 classes=classes,
-                 meta={"lake": lake.root, "sample": sample, "queries": queries,
-                       "model_id": model_id, "expand_hierarchy": expand,
-                       "machine_threshold": machine_threshold,
-                       "label_rows": int(len(labels.indices)),
-                       "known_authors": len(codes),
-                       "created": datetime.now(timezone.utc).isoformat()})
+    ds = Dataset(
+        emb=emb,
+        labels=labels,
+        author=author,
+        image_ids=item_ids,
+        q_emb=q_emb,
+        q_pos=q_pos,
+        q_neg=q_neg,
+        q_image_ids=q_ids,
+        classes=classes,
+        meta={
+            "lake": lake.root,
+            "sample": sample,
+            "queries": queries,
+            "model_id": model_id,
+            "expand_hierarchy": expand,
+            "machine_threshold": machine_threshold,
+            "label_rows": int(len(labels.indices)),
+            "known_authors": len(codes),
+            "created": datetime.now(UTC).isoformat(),
+        },
+    )
     ds.save(out_dir)
-    _log(f"wrote {out_dir}: {ds.n:,} x {ds.dim}, {len(labels.indices):,} item labels, "
-         f"{len(codes):,} authors")
+    _log(f"wrote {out_dir}: {ds.n:,} x {ds.dim}, {len(labels.indices):,} item labels, {len(codes):,} authors")

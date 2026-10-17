@@ -15,7 +15,7 @@ IMAGES_CSV = (
     "ImageID,Subset,OriginalURL,OriginalLandingURL,License,AuthorProfileURL,Author,Title,"
     "OriginalSize,OriginalMD5,Thumbnail300KURL,Rotation\n"
     "aaaa000000000001,train,https://x/1_o.jpg,https://l/1,cc-by,https://p/alice,Alice,"
-    "\"Two\nlines, quoted\",1234,md5a,https://x/1_z.jpg,90.0\n"
+    '"Two\nlines, quoted",1234,md5a,https://x/1_z.jpg,90.0\n'
     "aaaa000000000002,train,https://x/2_o.jpg,https://l/2,cc-by,https://p/bob,Bob,Plain,"
     "99,md5b,,nan\n"
     "aaaa000000000003,validation,https://x/3_o.jpg,https://l/3,cc-by,,,,,md5c,,0\n"
@@ -52,7 +52,7 @@ class TestModels(unittest.TestCase):
     def test_registry_shape(self):
         from oilake.embed import MODELS
 
-        for model_id, entry in MODELS.items():
+        for entry in MODELS.values():
             name, pretrained, dim = entry
             self.assertIsInstance(name, str)
             self.assertTrue(pretrained is None or isinstance(pretrained, str))
@@ -69,13 +69,15 @@ class TestPlanAndSample(unittest.TestCase):
         from oilake.keys import sample_key
 
         ids = [f"{i:016x}" for i in range(100)]
-        return pa.table({
-            "image_id": ids,
-            "s3_key": [f"train/{i}.jpg" for i in ids],
-            "rotation": pa.array([0] * 100, pa.int16()),
-            "sample_key": pa.array([sample_key(i) for i in ids], pa.int64()),
-            "in_s3_mirror": [i % 4 != 0 for i in range(100)],
-        })
+        return pa.table(
+            {
+                "image_id": ids,
+                "s3_key": [f"train/{i}.jpg" for i in ids],
+                "rotation": pa.array([0] * 100, pa.int16()),
+                "sample_key": pa.array([sample_key(i) for i in ids], pa.int64()),
+                "in_s3_mirror": [i % 4 != 0 for i in range(100)],
+            }
+        )
 
     def test_plan_order_units_and_prefix_property(self):
         from oilake.embed import make_plan
@@ -103,7 +105,6 @@ class TestPlanAndSample(unittest.TestCase):
         self.assertEqual(b[:10], a)
 
     def test_tail_holdout_and_exclude(self):
-        import pyarrow as pa
 
         from oilake.sample import choose
 

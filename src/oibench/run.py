@@ -44,7 +44,11 @@ MODE_GUCS = {
     # ordered vector index scan is the only plan that needs no sort. Window
     # queries still sort internally; PG 18 picks the plan with the fewest
     # disabled nodes, which keeps the vector scan underneath.
-    "forced": {"enable_seqscan": "off", "enable_bitmapscan": "off", "enable_sort": "off"},
+    "forced": {
+        "enable_seqscan": "off",
+        "enable_bitmapscan": "off",
+        "enable_sort": "off",
+    },
     "planner": {},
 }
 
@@ -74,11 +78,18 @@ def configs(sweep: dict) -> list[Config]:
         fixed = m.get("gucs", {})
         names = list(grid)
         for values in itertools.product(*(grid[n] for n in names)) if names else [()]:
-            gucs = dict(fixed, **dict(zip(names, values)))
+            gucs = dict(fixed, **dict(zip(names, values, strict=True)))
             for mode in m.get("modes", default_modes):
-                out.append(Config(method, tables[m["table"]], gucs, mode,
-                                  sweep.get("strategies", {}),
-                                  frozenset(m.get("kinds", default_kinds))))
+                out.append(
+                    Config(
+                        method,
+                        tables[m["table"]],
+                        gucs,
+                        mode,
+                        sweep.get("strategies", {}),
+                        frozenset(m.get("kinds", default_kinds)),
+                    )
+                )
     return out
 
 
@@ -110,14 +121,16 @@ def resume_state(out_dir: str, cfgs: list[Config], items: list[dict]) -> set[str
     done = {k for k, n in counts.items() if n >= want.get(k, want_foreign)}
     partial = set(counts) - done
     if partial:
-        print(f"dropping partial rows of {len(partial)} interrupted config(s): "
-              f"{sorted(partial)}", file=sys.stderr)
+        print(
+            f"dropping partial rows of {len(partial)} interrupted config(s): {sorted(partial)}",
+            file=sys.stderr,
+        )
         for name in ("results.jsonl", "explain.jsonl"):
             path = os.path.join(out_dir, name)
             if not os.path.exists(path):
                 continue
             with open(path) as f:
-                keep = [l for l in f if json.loads(l)["config"] not in partial]
+                keep = [line for line in f if json.loads(line)["config"] not in partial]
             with open(path + ".tmp", "w") as f:
                 f.writelines(keep)
             os.replace(path + ".tmp", path)
@@ -126,34 +139,44 @@ def resume_state(out_dir: str, cfgs: list[Config], items: list[dict]) -> set[str
 
 # --------------------------------------------------------------------------- SQL
 
+
 def sql_for(item: dict, table: str, strategy: str | None) -> tuple[str, dict]:
     kind = item["kind"]
     if kind == "filter":
-        return (f"SELECT id FROM {table} WHERE labels @> ARRAY[%(l)s]::int4[] "
-                f"ORDER BY embedding <=> %(q)s LIMIT {int(item['k'])}",
-                {"l": item["labels"][0]})
+        return (
+            f"SELECT id FROM {table} WHERE labels @> ARRAY[%(l)s]::int4[] "
+            f"ORDER BY embedding <=> %(q)s LIMIT {int(item['k'])}",
+            {"l": item["labels"][0]},
+        )
     if kind == "group_label":
         n = int(item["k"])
         if strategy == "lateral":
-            return (f"SELECT g.l, x.id FROM unnest(%(ls)s::int4[]) AS g(l) CROSS JOIN LATERAL "
-                    f"(SELECT id FROM {table} WHERE labels @> ARRAY[g.l] "
-                    f"ORDER BY embedding <=> %(q)s LIMIT {n}) x",
-                    {"ls": item["labels"]})
+            return (
+                f"SELECT g.l, x.id FROM unnest(%(ls)s::int4[]) AS g(l) CROSS JOIN LATERAL "
+                f"(SELECT id FROM {table} WHERE labels @> ARRAY[g.l] "
+                f"ORDER BY embedding <=> %(q)s LIMIT {n}) x",
+                {"ls": item["labels"]},
+            )
         m = _overfetch(strategy)
-        return (f"SELECT l, id FROM (SELECT u.l, c.id, row_number() OVER "
-                f"(PARTITION BY u.l ORDER BY c.d) AS rn FROM "
-                f"(SELECT id, labels, embedding <=> %(q)s AS d FROM {table} "
-                f"ORDER BY embedding <=> %(q)s LIMIT {m}) c "
-                f"CROSS JOIN LATERAL unnest(c.labels) AS u(l) "
-                f"WHERE u.l = ANY(%(ls)s::int4[])) s WHERE rn <= {n}",
-                {"ls": item["labels"]})
+        return (
+            f"SELECT l, id FROM (SELECT u.l, c.id, row_number() OVER "
+            f"(PARTITION BY u.l ORDER BY c.d) AS rn FROM "
+            f"(SELECT id, labels, embedding <=> %(q)s AS d FROM {table} "
+            f"ORDER BY embedding <=> %(q)s LIMIT {m}) c "
+            f"CROSS JOIN LATERAL unnest(c.labels) AS u(l) "
+            f"WHERE u.l = ANY(%(ls)s::int4[])) s WHERE rn <= {n}",
+            {"ls": item["labels"]},
+        )
     if kind == "diverse":
         m = _overfetch(strategy)
-        return (f"SELECT id FROM (SELECT id, d, row_number() OVER "
-                f"(PARTITION BY author_id ORDER BY d) AS rn FROM "
-                f"(SELECT id, author_id, embedding <=> %(q)s AS d FROM {table} "
-                f"ORDER BY embedding <=> %(q)s LIMIT {m}) c) s "
-                f"WHERE rn <= {int(item['cap'])} ORDER BY d LIMIT {int(item['k'])}", {})
+        return (
+            f"SELECT id FROM (SELECT id, d, row_number() OVER "
+            f"(PARTITION BY author_id ORDER BY d) AS rn FROM "
+            f"(SELECT id, author_id, embedding <=> %(q)s AS d FROM {table} "
+            f"ORDER BY embedding <=> %(q)s LIMIT {m}) c) s "
+            f"WHERE rn <= {int(item['cap'])} ORDER BY d LIMIT {int(item['k'])}",
+            {},
+        )
     raise ValueError(kind)
 
 
@@ -170,11 +193,18 @@ def strategies_for(item: dict, cfg: Config) -> list[str | None]:
 
 
 def cell_of(item: dict) -> tuple:
-    return (item["kind"], item.get("ftype"), item.get("bin"), item["k"],
-            item.get("G"), item.get("cap"))
+    return (
+        item["kind"],
+        item.get("ftype"),
+        item.get("bin"),
+        item["k"],
+        item.get("G"),
+        item.get("cap"),
+    )
 
 
 # --------------------------------------------------------------------------- explain helpers
+
 
 def plan_nodes(plan: dict) -> list[str]:
     """Flatten a JSON plan to 'Node Type[:Index Name]' strings."""
@@ -194,20 +224,33 @@ def plan_nodes(plan: dict) -> list[str]:
 
 # --------------------------------------------------------------------------- run
 
+
 def prewarm(conn, prefix: str) -> None:
     conn.execute("CREATE EXTENSION IF NOT EXISTS pg_prewarm")
     for t in table_names(prefix).values():
-        rels = [r[0] for r in conn.execute(
-            "SELECT indexrelid::regclass::text FROM pg_index WHERE indrelid = %s::regclass", (t,))]
+        rels = [
+            r[0]
+            for r in conn.execute(
+                "SELECT indexrelid::regclass::text FROM pg_index WHERE indrelid = %s::regclass",
+                (t,),
+            )
+        ]
         for rel in [t] + rels:
             t0 = time.time()
             n = conn.execute("SELECT pg_prewarm(%s::regclass)", (rel,)).fetchone()[0]
             print(f"prewarm {rel}: {n:,} blocks, {time.time() - t0:.1f}s", file=sys.stderr)
 
 
-def run(dsn: str, data_dir: str, workload_dir: str, sweep_path: str, out_dir: str,
-        only_methods: list[str] | None = None, limit: int | None = None,
-        prefix: str | None = None) -> None:
+def run(
+    dsn: str,
+    data_dir: str,
+    workload_dir: str,
+    sweep_path: str,
+    out_dir: str,
+    only_methods: list[str] | None = None,
+    limit: int | None = None,
+    prefix: str | None = None,
+) -> None:
     from pgvector import HalfVector
 
     with open(sweep_path, "rb") as f:
@@ -240,8 +283,14 @@ def run(dsn: str, data_dir: str, workload_dir: str, sweep_path: str, out_dir: st
     cfgs = [c for c in configs(sweep) if not only_methods or c.method in only_methods]
     done = resume_state(out_dir, cfgs, items)
     if done:
-        print(f"resuming: {len(done)} config(s) already complete, skipping them", file=sys.stderr)
-    print(f"{len(cfgs) - len(done)} configs to run x {len(items)} queries", file=sys.stderr)
+        print(
+            f"resuming: {len(done)} config(s) already complete, skipping them",
+            file=sys.stderr,
+        )
+    print(
+        f"{len(cfgs) - len(done)} configs to run x {len(items)} queries",
+        file=sys.stderr,
+    )
     res_f = open(os.path.join(out_dir, "results.jsonl"), "a")
     exp_f = open(os.path.join(out_dir, "explain.jsonl"), "a")
 
@@ -249,7 +298,7 @@ def run(dsn: str, data_dir: str, workload_dir: str, sweep_path: str, out_dir: st
         if cfg.key in done:
             continue
         conn.execute("RESET ALL")
-        conn.execute("DEALLOCATE ALL")   # belt and braces: no plan survives a config change
+        conn.execute("DEALLOCATE ALL")  # belt and braces: no plan survives a config change
         conn.execute(f"SET statement_timeout = '{timeout}'")
         for k, v in {**MODE_GUCS[cfg.mode], **cfg.gucs}.items():
             conn.execute(f"SET {k} = '{v}'")
@@ -265,8 +314,14 @@ def run(dsn: str, data_dir: str, workload_dir: str, sweep_path: str, out_dir: st
             for strategy in strategies_for(item, cfg):
                 sql, params = sql_for(item, cfg.table, strategy)
                 params["q"] = qvec[q]
-                row = {"config": cfg.key, "method": cfg.method, "mode": cfg.mode,
-                       "gucs": cfg.gucs, "strategy": strategy, "qid": item["qid"]}
+                row = {
+                    "config": cfg.key,
+                    "method": cfg.method,
+                    "mode": cfg.mode,
+                    "gucs": cfg.gucs,
+                    "strategy": strategy,
+                    "qid": item["qid"],
+                }
                 t0 = time.perf_counter()
                 try:
                     rows = conn.execute(sql, params).fetchall()
@@ -290,15 +345,27 @@ def run(dsn: str, data_dir: str, workload_dir: str, sweep_path: str, out_dir: st
                     try:
                         plan = conn.execute(
                             "EXPLAIN (ANALYZE, BUFFERS, VERBOSE, FORMAT JSON) " + sql,
-                            params).fetchone()[0][0]
-                        exp_f.write(json.dumps({"config": cfg.key, "strategy": strategy,
-                                                "qid": item["qid"], "nodes": plan_nodes(plan),
-                                                "plan": plan}) + "\n")
+                            params,
+                        ).fetchone()[0][0]
+                        exp_f.write(
+                            json.dumps(
+                                {
+                                    "config": cfg.key,
+                                    "strategy": strategy,
+                                    "qid": item["qid"],
+                                    "nodes": plan_nodes(plan),
+                                    "plan": plan,
+                                }
+                            )
+                            + "\n"
+                        )
                     except Exception as e:
                         print(f"  explain failed: {e}", file=sys.stderr)
         res_f.flush()
         exp_f.flush()
-        print(f"[{ci + 1}/{len(cfgs)}] {cfg.key}: {time.time() - t_cfg:.0f}s, {n_err} errors",
-              file=sys.stderr)
+        print(
+            f"[{ci + 1}/{len(cfgs)}] {cfg.key}: {time.time() - t_cfg:.0f}s, {n_err} errors",
+            file=sys.stderr,
+        )
     res_f.close()
     exp_f.close()

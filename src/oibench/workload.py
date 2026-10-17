@@ -38,14 +38,14 @@ from .truth import Exact
 class Spec:
     ks: list[int] = field(default_factory=lambda: [10, 100])
     n_per_cell: int = 50
-    log10_top: float = 0.0          # bins from 10^0 ...
-    log10_bottom: float = -5.0      # ... down to 10^-5
+    log10_top: float = 0.0  # bins from 10^0 ...
+    log10_bottom: float = -5.0  # ... down to 10^-5
     bin_step: float = 0.5
     ftypes: list[str] = field(default_factory=lambda: ["pos", "rand", "neg"])
     group_sizes: list[int] = field(default_factory=lambda: [10, 100])
     group_n: int = 3
     diverse_caps: list[int] = field(default_factory=lambda: [1, 2])
-    lift_top: int = 1000            # T for lift; also the diverse candidate pool
+    lift_top: int = 1000  # T for lift; also the diverse candidate pool
     seed: int = 0
 
 
@@ -73,7 +73,7 @@ def generate(ds: Dataset, spec: Spec, log=lambda *a: print(*a, file=sys.stderr))
     top_t = exact.topk_batch(ds.q_emb, spec.lift_top)
 
     def items_of(label: int) -> np.ndarray:
-        return inv.indices[inv.indptr[label]:inv.indptr[label + 1]]
+        return inv.indices[inv.indptr[label] : inv.indptr[label + 1]]
 
     def lift(qi: int, label: int) -> float:
         frac = np.isin(top_t[qi], items_of(label), assume_unique=True).mean()
@@ -88,7 +88,6 @@ def generate(ds: Dataset, spec: Spec, log=lambda *a: print(*a, file=sys.stderr))
         workload.append(item)
         truth.append(answer)
 
-    kmax = max(spec.ks)
     for b in bins(spec):
         in_bin = (sel > b[0]) & (sel <= b[1]) & (counts > 0)
         bname = bin_name(b)
@@ -120,10 +119,19 @@ def generate(ds: Dataset, spec: Spec, log=lambda *a: print(*a, file=sys.stderr))
                         continue
                     label = int(rng.choice(cand))
                     ids, dists = exact.filtered(ds.q_emb[qi], k, items_of(label))
-                    emit({"kind": "filter", "ftype": ftype, "bin": bname, "k": k,
-                          "q": int(qi), "labels": [label],
-                          "selectivity": float(sel[label]), "lift": lift(qi, label)},
-                         {"ids": ids.tolist(), "dists": dists.tolist()})
+                    emit(
+                        {
+                            "kind": "filter",
+                            "ftype": ftype,
+                            "bin": bname,
+                            "k": k,
+                            "q": int(qi),
+                            "labels": [label],
+                            "selectivity": float(sel[label]),
+                            "lift": lift(qi, label),
+                        },
+                        {"ids": ids.tolist(), "dists": dists.tolist()},
+                    )
                     picked += 1
                     if picked >= spec.n_per_cell:
                         break
@@ -137,11 +145,18 @@ def generate(ds: Dataset, spec: Spec, log=lambda *a: print(*a, file=sys.stderr))
             for qi in rng.choice(Q, size=min(spec.n_per_cell, Q), replace=False):
                 labels = sorted(int(x) for x in rng.choice(eligible, size=G, replace=False))
                 groups = {L: items_of(L) for L in labels}
-                emit({"kind": "group_label", "bin": bname, "k": spec.group_n, "G": G,
-                      "q": int(qi), "labels": labels,
-                      "selectivity": float(np.mean(sel[labels]))},
-                     {"groups": {str(g): v for g, v in
-                                 exact.grouped(ds.q_emb[qi], spec.group_n, groups).items()}})
+                emit(
+                    {
+                        "kind": "group_label",
+                        "bin": bname,
+                        "k": spec.group_n,
+                        "G": G,
+                        "q": int(qi),
+                        "labels": labels,
+                        "selectivity": float(np.mean(sel[labels])),
+                    },
+                    {"groups": {str(g): v for g, v in exact.grouped(ds.q_emb[qi], spec.group_n, groups).items()}},
+                )
             log(f"group_label {bname} G={G}: {min(spec.n_per_cell, Q)}")
 
     # ---- diversity queries
@@ -151,8 +166,10 @@ def generate(ds: Dataset, spec: Spec, log=lambda *a: print(*a, file=sys.stderr))
             for qi in rng.choice(Q, size=min(spec.n_per_cell, Q), replace=False):
                 ids, fb = exact.diverse(ds.q_emb[qi], k, cap, ds.author, top_t[qi])
                 fallbacks += fb
-                emit({"kind": "diverse", "k": k, "cap": cap, "q": int(qi), "labels": []},
-                     {"ids": ids})
+                emit(
+                    {"kind": "diverse", "k": k, "cap": cap, "q": int(qi), "labels": []},
+                    {"ids": ids},
+                )
     log(f"diverse: {len(spec.diverse_caps) * len(spec.ks)} cells, {fallbacks} full-scan fallbacks")
     return workload, truth
 

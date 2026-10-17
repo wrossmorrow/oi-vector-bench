@@ -52,26 +52,37 @@ def summarize(workload_dir: str, results_dir: str):
             r = json.loads(line)
             w = items[r["qid"]]
             rec, short = score(w, truth[r["qid"]], r)
-            rows.append({
-                "method": r["method"], "mode": r["mode"],
-                "gucs_s": ",".join(f"{k}={v}" for k, v in sorted(r["gucs"].items())) or "-",
-                "strategy": r["strategy"] or "-",
-                **{c: w.get(c) for c in CELL},
-                "selectivity": w.get("selectivity"), "lift": w.get("lift"),
-                "qid": r["qid"], "recall": rec, "short": short,
-                "error": "error" in r, "latency_ms": r["latency_ms"],
-            })
+            rows.append(
+                {
+                    "method": r["method"],
+                    "mode": r["mode"],
+                    "gucs_s": ",".join(f"{k}={v}" for k, v in sorted(r["gucs"].items())) or "-",
+                    "strategy": r["strategy"] or "-",
+                    **{c: w.get(c) for c in CELL},
+                    "selectivity": w.get("selectivity"),
+                    "lift": w.get("lift"),
+                    "qid": r["qid"],
+                    "recall": rec,
+                    "short": short,
+                    "error": "error" in r,
+                    "latency_ms": r["latency_ms"],
+                }
+            )
     df = pd.DataFrame(rows)
     df[CELL] = df[CELL].astype(object).where(df[CELL].notna(), "-")
-    agg = (df.groupby(CONFIG + CELL, dropna=False)
-             .agg(n=("recall", "size"),
-                  recall=("recall", "mean"),
-                  recall_p10=("recall", lambda s: s.quantile(0.10)),
-                  short=("short", "mean"),
-                  errors=("error", "mean"),
-                  lat_p50=("latency_ms", "median"),
-                  lat_p95=("latency_ms", lambda s: s.quantile(0.95)))
-             .reset_index())
+    agg = (
+        df.groupby(CONFIG + CELL, dropna=False)
+        .agg(
+            n=("recall", "size"),
+            recall=("recall", "mean"),
+            recall_p10=("recall", lambda s: s.quantile(0.10)),
+            short=("short", "mean"),
+            errors=("error", "mean"),
+            lat_p50=("latency_ms", "median"),
+            lat_p95=("latency_ms", lambda s: s.quantile(0.95)),
+        )
+        .reset_index()
+    )
     return df, agg
 
 
@@ -100,8 +111,7 @@ def plan_summary(workload_dir: str, results_dir: str) -> list[tuple[str, str, st
 
 def filter_pivot(agg, k: int = 10, value: str = "recall"):
     f = agg[(agg.kind == "filter") & (agg.k == k)]
-    return f.pivot_table(index=["method", "mode", "gucs_s"], columns=["ftype", "bin"],
-                         values=value).round(3)
+    return f.pivot_table(index=["method", "mode", "gucs_s"], columns=["ftype", "bin"], values=value).round(3)
 
 
 def write(workload_dir: str, results_dir: str) -> None:
@@ -117,7 +127,10 @@ def write(workload_dir: str, results_dir: str) -> None:
             sub = agg[agg.kind == kind]
             if len(sub):
                 f.write(f"## {kind}\n\n")
-                cols = CONFIG + [c for c in CELL if c != "kind"] + \
-                    ["n", "recall", "recall_p10", "short", "lat_p50", "lat_p95"]
+                cols = (
+                    CONFIG
+                    + [c for c in CELL if c != "kind"]
+                    + ["n", "recall", "recall_p10", "short", "lat_p50", "lat_p95"]
+                )
                 f.write(sub[cols].round(3).to_markdown(index=False) + "\n\n")
     print(f"wrote scored.csv, summary.csv, report.md in {results_dir}")

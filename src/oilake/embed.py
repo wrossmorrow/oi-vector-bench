@@ -25,8 +25,8 @@ import io
 import os
 import sys
 import time
+from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Callable
 
 import pyarrow as pa
 import pyarrow.compute as pc
@@ -47,16 +47,19 @@ MODELS = {
     "clip-l14-336": ("ViT-L-14-336", "openai", 768),
 }
 
-PLAN_SCHEMA = pa.schema([
-    ("unit", pa.int32()),
-    ("image_id", pa.string()),
-    ("s3_key", pa.string()),
-    ("rotation", pa.int16()),
-    ("sample_key", pa.int64()),
-])
+PLAN_SCHEMA = pa.schema(
+    [
+        ("unit", pa.int32()),
+        ("image_id", pa.string()),
+        ("s3_key", pa.string()),
+        ("rotation", pa.int16()),
+        ("sample_key", pa.int64()),
+    ]
+)
 
 
 # --------------------------------------------------------------------------- plan
+
 
 def make_plan(images: pa.Table, unit_size: int, limit: int | None = None) -> pa.Table:
     """images: columns image_id, s3_key, rotation, sample_key, in_s3_mirror."""
@@ -65,8 +68,10 @@ def make_plan(images: pa.Table, unit_size: int, limit: int | None = None) -> pa.
     if limit is not None:
         t = t.slice(0, limit)
     unit = pa.array([i // unit_size for i in range(t.num_rows)], pa.int32())
-    return pa.table([unit, t["image_id"], t["s3_key"], t["rotation"], t["sample_key"]],
-                    schema=PLAN_SCHEMA)
+    return pa.table(
+        [unit, t["image_id"], t["s3_key"], t["rotation"], t["sample_key"]],
+        schema=PLAN_SCHEMA,
+    )
 
 
 def plan(lake: Lake, model_id: str, unit_size: int = 20_000, limit: int | None = None) -> str:
@@ -76,7 +81,8 @@ def plan(lake: Lake, model_id: str, unit_size: int = 20_000, limit: int | None =
     dt = DeltaTable(lake.table("images"), storage_options=lake.storage_options)
     images = dt.to_pyarrow_dataset().to_table(
         columns=["image_id", "s3_key", "rotation", "sample_key", "in_s3_mirror"],
-        filter=pc.field("in_s3_mirror"))
+        filter=pc.field("in_s3_mirror"),
+    )
     p = make_plan(images, unit_size, limit)
     fs, _ = lake.filesystem()
     path = lake.fs_path(lake.staging(model_id)) + "/plan.parquet"
@@ -102,16 +108,16 @@ def _done_units(fs, stage: str) -> list[str]:
     import pyarrow.fs as pafs
 
     sel = pafs.FileSelector(stage + "/units", allow_not_found=True)
-    return [os.path.basename(i.path)[: -len(".parquet")]
-            for i in fs.get_file_info(sel) if i.path.endswith(".parquet")]
+    return [os.path.basename(i.path)[: -len(".parquet")] for i in fs.get_file_info(sel) if i.path.endswith(".parquet")]
 
 
 # --------------------------------------------------------------------------- encoders
 
+
 @dataclass
 class Encoder:
-    preprocess: Callable          # PIL.Image -> CHW tensor
-    encode: Callable              # NCHW tensor -> (N, dim) L2-normalized float32 numpy
+    preprocess: Callable  # PIL.Image -> CHW tensor
+    encode: Callable  # NCHW tensor -> (N, dim) L2-normalized float32 numpy
     dim: int
     device: str
 
@@ -135,8 +141,11 @@ def load_encoder(model_id: str, device: str = "auto") -> Encoder:
     _check_model(model_id)
     name, pretrained, dim = MODELS[model_id]
     device = pick_device(device)
-    model, preprocess = (open_clip.create_model_from_pretrained(name, pretrained=pretrained)
-                         if pretrained else open_clip.create_model_from_pretrained(name))
+    model, preprocess = (
+        open_clip.create_model_from_pretrained(name, pretrained=pretrained)
+        if pretrained
+        else open_clip.create_model_from_pretrained(name)
+    )
     model = model.eval().to(device)
     use_fp16 = device == "cuda"
 
@@ -152,6 +161,7 @@ def load_encoder(model_id: str, device: str = "auto") -> Encoder:
 
 
 # --------------------------------------------------------------------------- fetching
+
 
 class S3MirrorFetcher:
     """Unsigned reads from the public mirror; one boto3 client per process."""
@@ -172,9 +182,15 @@ class S3MirrorFetcher:
 
             # Pin the mirror's region: hosts outside AWS (Lambda, the Mac) may have
             # no AWS config at all, and the lake bucket's region is irrelevant here.
-            self._client = boto3.client("s3", region_name=sources.MIRROR_REGION, config=Config(
-                signature_version=UNSIGNED, retries={"max_attempts": 8, "mode": "adaptive"},
-                max_pool_connections=FETCH_THREADS))
+            self._client = boto3.client(
+                "s3",
+                region_name=sources.MIRROR_REGION,
+                config=Config(
+                    signature_version=UNSIGNED,
+                    retries={"max_attempts": 8, "mode": "adaptive"},
+                    max_pool_connections=FETCH_THREADS,
+                ),
+            )
             self._pid = os.getpid()
         return self._client.get_object(Bucket=self.bucket, Key=key)["Body"].read()
 
@@ -202,6 +218,7 @@ def decode(data: bytes, rotation: int | None, apply_rotation: bool):
 
 
 # --------------------------------------------------------------------------- run
+
 
 def _err(e: Exception) -> str:
     return f"{type(e).__name__}: {e}"[:500]
@@ -254,10 +271,10 @@ class UnitDataset:
         # bound; parallelism comes from the worker processes).
         if self._pool is None:
             from concurrent.futures import ThreadPoolExecutor
+
             self._pool = ThreadPoolExecutor(FETCH_THREADS)
         fetched = list(self._pool.map(self._get, idx))
-        return [(None, i, err) if err else self._process(i, data)
-                for i, (data, err) in zip(idx, fetched)]
+        return [(None, i, err) if err else self._process(i, data) for i, (data, err) in zip(idx, fetched, strict=True)]
 
 
 def _collate(batch):
@@ -269,16 +286,29 @@ def _collate(batch):
     return xs, [i for _, i in ok], errs
 
 
-def embed_unit(rows: list[dict], encoder: Encoder, fetch, *, model_id: str,
-               batch_size: int, num_workers: int, apply_rotation: bool) -> pa.Table:
+def embed_unit(
+    rows: list[dict],
+    encoder: Encoder,
+    fetch,
+    *,
+    model_id: str,
+    batch_size: int,
+    num_workers: int,
+    apply_rotation: bool,
+) -> pa.Table:
     import numpy as np
     import torch
 
     ds = UnitDataset(rows, fetch, encoder.preprocess, apply_rotation)
     loader = torch.utils.data.DataLoader(
-        ds, batch_size=batch_size, num_workers=num_workers, collate_fn=_collate,
-        pin_memory=encoder.device == "cuda", prefetch_factor=4 if num_workers else None,
-        persistent_workers=False)
+        ds,
+        batch_size=batch_size,
+        num_workers=num_workers,
+        collate_fn=_collate,
+        pin_memory=encoder.device == "cuda",
+        prefetch_factor=4 if num_workers else None,
+        persistent_workers=False,
+    )
 
     n = len(rows)
     vecs = np.zeros((n, encoder.dim), dtype=np.float32)
@@ -291,18 +321,29 @@ def embed_unit(rows: list[dict], encoder: Encoder, fetch, *, model_id: str,
 
     mask = pa.array([e is not None for e in errors])
     emb = pa.FixedSizeListArray.from_arrays(pa.array(vecs.reshape(-1)), encoder.dim, mask=mask)
-    return pa.table({
-        "image_id": pa.array([r["image_id"] for r in rows], pa.string()),
-        "embedding": emb,
-        "error": pa.array(errors, pa.string()),
-        "rotation_applied": pa.array([bool(apply_rotation and r["rotation"]) for r in rows]),
-        "model_id": pa.array([model_id] * n, pa.string()),
-    })
+    return pa.table(
+        {
+            "image_id": pa.array([r["image_id"] for r in rows], pa.string()),
+            "embedding": emb,
+            "error": pa.array(errors, pa.string()),
+            "rotation_applied": pa.array([bool(apply_rotation and r["rotation"]) for r in rows]),
+            "model_id": pa.array([model_id] * n, pa.string()),
+        }
+    )
 
 
-def run(lake: Lake, model_id: str, *, worker: tuple[int, int] = (0, 1), batch_size: int = 256,
-        num_workers: int = 24, device: str = "auto", apply_rotation: bool = True,
-        local_images: str | None = None, max_units: int | None = None) -> None:
+def run(
+    lake: Lake,
+    model_id: str,
+    *,
+    worker: tuple[int, int] = (0, 1),
+    batch_size: int = 256,
+    num_workers: int = 24,
+    device: str = "auto",
+    apply_rotation: bool = True,
+    local_images: str | None = None,
+    max_units: int | None = None,
+) -> None:
     fs, stage, p = _load_plan(lake, model_id)
     fs.create_dir(stage + "/units", recursive=True)
     unit_ids = sorted(set(p["unit"].to_pylist()))
@@ -317,10 +358,16 @@ def run(lake: Lake, model_id: str, *, worker: tuple[int, int] = (0, 1), batch_si
     fetch = LocalFetcher(local_images) if local_images else S3MirrorFetcher()
     for u in todo:
         t0 = time.time()
-        rows = p.filter(pc.equal(p["unit"], u)).select(
-            ["image_id", "s3_key", "rotation"]).to_pylist()
-        out = embed_unit(rows, encoder, fetch, model_id=model_id, batch_size=batch_size,
-                         num_workers=num_workers, apply_rotation=apply_rotation)
+        rows = p.filter(pc.equal(p["unit"], u)).select(["image_id", "s3_key", "rotation"]).to_pylist()
+        out = embed_unit(
+            rows,
+            encoder,
+            fetch,
+            model_id=model_id,
+            batch_size=batch_size,
+            num_workers=num_workers,
+            apply_rotation=apply_rotation,
+        )
         # S3 objects appear atomically on completion; locally, write-then-rename.
         final = f"{stage}/units/{unit_name(u)}.parquet"
         tmp = final if lake.is_s3 else final + ".tmp"
@@ -329,11 +376,14 @@ def run(lake: Lake, model_id: str, *, worker: tuple[int, int] = (0, 1), batch_si
             fs.move(tmp, final)
         n_err = len(rows) - out["error"].null_count
         dt = time.time() - t0
-        print(f"{unit_name(u)}: {len(rows):,} images, {n_err:,} errors, "
-              f"{len(rows) / dt:,.0f} img/s", file=sys.stderr)
+        print(
+            f"{unit_name(u)}: {len(rows):,} images, {n_err:,} errors, {len(rows) / dt:,.0f} img/s",
+            file=sys.stderr,
+        )
 
 
 # --------------------------------------------------------------------------- finalize
+
 
 def finalize(lake: Lake, model_id: str, allow_missing: bool = False) -> None:
     from deltalake import DeltaTable, write_deltalake
@@ -343,17 +393,20 @@ def finalize(lake: Lake, model_id: str, allow_missing: bool = False) -> None:
     done = set(_done_units(fs, stage))
     missing = sorted(planned - done)
     if missing and not allow_missing:
-        raise SystemExit(f"{len(missing)} units not embedded yet (first: {missing[0]}); "
-                         "run more workers or pass --allow-missing")
+        raise SystemExit(
+            f"{len(missing)} units not embedded yet (first: {missing[0]}); run more workers or pass --allow-missing"
+        )
 
     dim = MODELS[model_id][2]
-    schema = pa.schema([
-        ("image_id", pa.string()),
-        ("embedding", pa.list_(pa.float32())),  # Delta has no fixed-size list
-        ("error", pa.string()),
-        ("rotation_applied", pa.bool_()),
-        ("model_id", pa.string()),
-    ])
+    schema = pa.schema(
+        [
+            ("image_id", pa.string()),
+            ("embedding", pa.list_(pa.float32())),  # Delta has no fixed-size list
+            ("error", pa.string()),
+            ("rotation_applied", pa.bool_()),
+            ("model_id", pa.string()),
+        ]
+    )
 
     def batches():
         for name in sorted(done & planned):
@@ -364,8 +417,15 @@ def finalize(lake: Lake, model_id: str, allow_missing: bool = False) -> None:
     reader = pa.RecordBatchReader.from_batches(schema, batches())
     uri = lake.table("embeddings")
     exists = DeltaTable.is_deltatable(uri, storage_options=lake.storage_options)
-    write_deltalake(uri, reader, mode="overwrite", partition_by=["model_id"],
-                    predicate=f"model_id = '{model_id}'" if exists else None,
-                    storage_options=lake.storage_options)
-    print(f"finalized {len(done & planned)} units of {model_id} (dim {dim}) -> {uri}",
-          file=sys.stderr)
+    write_deltalake(
+        uri,
+        reader,
+        mode="overwrite",
+        partition_by=["model_id"],
+        predicate=f"model_id = '{model_id}'" if exists else None,
+        storage_options=lake.storage_options,
+    )
+    print(
+        f"finalized {len(done & planned)} units of {model_id} (dim {dim}) -> {uri}",
+        file=sys.stderr,
+    )

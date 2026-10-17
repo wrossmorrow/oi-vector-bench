@@ -31,7 +31,7 @@ MACHINE_LABELS = {
     "test": f"{GCS}/v7/oidv7-test-annotations-machine-imagelabels.csv",
 }
 
-CLASS_DESCRIPTIONS = f"{GCS}/v7/oidv7-class-descriptions.csv"            # ~20.6k classes
+CLASS_DESCRIPTIONS = f"{GCS}/v7/oidv7-class-descriptions.csv"  # ~20.6k classes
 BOXABLE_CLASS_DESCRIPTIONS = f"{GCS}/v7/oidv7-class-descriptions-boxable.csv"
 TRAINABLE_CLASSES = f"{GCS}/v7/oidv7-classes-trainable.txt"
 # Hierarchy exists only for the 600 boxable classes.
