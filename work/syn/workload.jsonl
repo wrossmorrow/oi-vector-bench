@@ -1,0 +1,491 @@
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 10, "q": 105, "labels": [9], "selectivity": 0.02928, "lift": 20.252732240437158, "qid": 0}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 10, "q": 6, "labels": [10], "selectivity": 0.03018, "lift": 19.71504307488403, "qid": 1}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 10, "q": 168, "labels": [6], "selectivity": 0.03014, "lift": 20.17252820172528, "qid": 2}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 10, "q": 65, "labels": [44], "selectivity": 0.01632, "lift": 20.772058823529413, "qid": 3}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 10, "q": 159, "labels": [7], "selectivity": 0.03004, "lift": 19.940079893475364, "qid": 4}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 10, "q": 165, "labels": [0], "selectivity": 0.03058, "lift": 20.928711576193592, "qid": 5}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 10, "q": 111, "labels": [74], "selectivity": 0.01216, "lift": 19.736842105263158, "qid": 6}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 10, "q": 92, "labels": [3], "selectivity": 0.03038, "lift": 20.375246872942725, "qid": 7}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 10, "q": 91, "labels": [24], "selectivity": 0.0228, "lift": 19.605263157894736, "qid": 8}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 10, "q": 152, "labels": [8], "selectivity": 0.03036, "lift": 19.334650856389985, "qid": 9}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 10, "q": 157, "labels": [0], "selectivity": 0.03058, "lift": 19.7187704381949, "qid": 10}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 10, "q": 72, "labels": [33], "selectivity": 0.023, "lift": 19.565217391304348, "qid": 11}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 10, "q": 126, "labels": [15], "selectivity": 0.02968, "lift": 20.350404312668463, "qid": 12}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 10, "q": 54, "labels": [78], "selectivity": 0.01152, "lift": 20.486111111111107, "qid": 13}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 10, "q": 142, "labels": [56], "selectivity": 0.01828, "lift": 19.638949671772426, "qid": 14}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 10, "q": 139, "labels": [34], "selectivity": 0.0219, "lift": 19.589041095890412, "qid": 15}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 10, "q": 158, "labels": [78], "selectivity": 0.01152, "lift": 20.486111111111107, "qid": 16}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 10, "q": 180, "labels": [39], "selectivity": 0.02258, "lift": 20.54915854738707, "qid": 17}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 10, "q": 0, "labels": [1], "selectivity": 0.03012, "lift": 19.787516600265604, "qid": 18}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 10, "q": 117, "labels": [6], "selectivity": 0.03014, "lift": 19.940278699402786, "qid": 19}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 100, "q": 3, "labels": [40], "selectivity": 0.0174, "lift": 18.85057471264368, "qid": 20}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 100, "q": 159, "labels": [7], "selectivity": 0.03004, "lift": 19.940079893475364, "qid": 21}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 100, "q": 187, "labels": [44], "selectivity": 0.01632, "lift": 20.098039215686274, "qid": 22}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 100, "q": 151, "labels": [40], "selectivity": 0.0174, "lift": 19.770114942528735, "qid": 23}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 100, "q": 22, "labels": [79], "selectivity": 0.01316, "lift": 19.6048632218845, "qid": 24}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 100, "q": 120, "labels": [7], "selectivity": 0.03004, "lift": 19.440745672436748, "qid": 25}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 100, "q": 2, "labels": [22], "selectivity": 0.02228, "lift": 20.421903052064632, "qid": 26}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 100, "q": 195, "labels": [58], "selectivity": 0.01664, "lift": 20.13221153846154, "qid": 27}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 100, "q": 27, "labels": [10], "selectivity": 0.03018, "lift": 19.94698475811796, "qid": 28}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 100, "q": 161, "labels": [9], "selectivity": 0.02928, "lift": 20.594262295081965, "qid": 29}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 100, "q": 28, "labels": [29], "selectivity": 0.02128, "lift": 20.535714285714285, "qid": 30}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 100, "q": 101, "labels": [34], "selectivity": 0.0219, "lift": 19.041095890410958, "qid": 31}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 100, "q": 98, "labels": [66], "selectivity": 0.01232, "lift": 19.967532467532468, "qid": 32}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 100, "q": 89, "labels": [4], "selectivity": 0.03008, "lift": 19.98005319148936, "qid": 33}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 100, "q": 147, "labels": [14], "selectivity": 0.0298, "lift": 19.731543624161073, "qid": 34}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 100, "q": 7, "labels": [3], "selectivity": 0.03038, "lift": 19.782751810401578, "qid": 35}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 100, "q": 54, "labels": [78], "selectivity": 0.01152, "lift": 20.486111111111107, "qid": 36}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 100, "q": 100, "labels": [3], "selectivity": 0.03038, "lift": 20.21066491112574, "qid": 37}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 100, "q": 152, "labels": [8], "selectivity": 0.03036, "lift": 19.334650856389985, "qid": 38}
+{"kind": "filter", "ftype": "pos", "bin": "1e-02-3e-02", "k": 100, "q": 88, "labels": [22], "selectivity": 0.02228, "lift": 18.76122082585278, "qid": 39}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 10, "q": 103, "labels": [29], "selectivity": 0.02128, "lift": 0.0, "qid": 40}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 10, "q": 115, "labels": [30], "selectivity": 0.02296, "lift": 0.0, "qid": 41}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 10, "q": 14, "labels": [46], "selectivity": 0.01716, "lift": 0.0, "qid": 42}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 10, "q": 171, "labels": [47], "selectivity": 0.01752, "lift": 0.0, "qid": 43}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 10, "q": 117, "labels": [75], "selectivity": 0.01302, "lift": 0.0, "qid": 44}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 10, "q": 141, "labels": [31], "selectivity": 0.02244, "lift": 0.0, "qid": 45}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 10, "q": 40, "labels": [46], "selectivity": 0.01716, "lift": 0.0, "qid": 46}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 10, "q": 183, "labels": [13], "selectivity": 0.03028, "lift": 0.0, "qid": 47}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 10, "q": 36, "labels": [51], "selectivity": 0.01658, "lift": 0.0, "qid": 48}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 10, "q": 173, "labels": [75], "selectivity": 0.01302, "lift": 0.0, "qid": 49}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 10, "q": 68, "labels": [72], "selectivity": 0.01254, "lift": 0.0, "qid": 50}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 10, "q": 108, "labels": [4], "selectivity": 0.03008, "lift": 0.0, "qid": 51}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 10, "q": 105, "labels": [51], "selectivity": 0.01658, "lift": 0.0, "qid": 52}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 10, "q": 112, "labels": [49], "selectivity": 0.01654, "lift": 0.0, "qid": 53}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 10, "q": 124, "labels": [51], "selectivity": 0.01658, "lift": 0.0, "qid": 54}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 10, "q": 4, "labels": [79], "selectivity": 0.01316, "lift": 0.0, "qid": 55}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 10, "q": 161, "labels": [40], "selectivity": 0.0174, "lift": 0.0, "qid": 56}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 10, "q": 95, "labels": [11], "selectivity": 0.0297, "lift": 0.0, "qid": 57}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 10, "q": 167, "labels": [66], "selectivity": 0.01232, "lift": 0.0, "qid": 58}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 10, "q": 84, "labels": [59], "selectivity": 0.01636, "lift": 0.0, "qid": 59}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 100, "q": 60, "labels": [30], "selectivity": 0.02296, "lift": 0.0, "qid": 60}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 100, "q": 155, "labels": [76], "selectivity": 0.01228, "lift": 0.0, "qid": 61}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 100, "q": 79, "labels": [46], "selectivity": 0.01716, "lift": 0.0, "qid": 62}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 100, "q": 101, "labels": [11], "selectivity": 0.0297, "lift": 0.0, "qid": 63}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 100, "q": 177, "labels": [60], "selectivity": 0.01228, "lift": 0.0, "qid": 64}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 100, "q": 133, "labels": [54], "selectivity": 0.01806, "lift": 0.0, "qid": 65}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 100, "q": 182, "labels": [45], "selectivity": 0.01632, "lift": 0.0, "qid": 66}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 100, "q": 44, "labels": [34], "selectivity": 0.0219, "lift": 0.0, "qid": 67}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 100, "q": 174, "labels": [36], "selectivity": 0.0226, "lift": 0.0, "qid": 68}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 100, "q": 36, "labels": [11], "selectivity": 0.0297, "lift": 0.0, "qid": 69}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 100, "q": 150, "labels": [24], "selectivity": 0.0228, "lift": 18.94736842105263, "qid": 70}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 100, "q": 104, "labels": [60], "selectivity": 0.01228, "lift": 0.0, "qid": 71}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 100, "q": 42, "labels": [15], "selectivity": 0.02968, "lift": 0.0, "qid": 72}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 100, "q": 116, "labels": [55], "selectivity": 0.01686, "lift": 0.0, "qid": 73}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 100, "q": 1, "labels": [20], "selectivity": 0.0221, "lift": 0.0, "qid": 74}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 100, "q": 33, "labels": [28], "selectivity": 0.02342, "lift": 0.0, "qid": 75}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 100, "q": 193, "labels": [73], "selectivity": 0.01306, "lift": 0.0, "qid": 76}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 100, "q": 51, "labels": [74], "selectivity": 0.01216, "lift": 0.0, "qid": 77}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 100, "q": 74, "labels": [60], "selectivity": 0.01228, "lift": 0.0, "qid": 78}
+{"kind": "filter", "ftype": "rand", "bin": "1e-02-3e-02", "k": 100, "q": 96, "labels": [3], "selectivity": 0.03038, "lift": 0.0, "qid": 79}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 10, "q": 19, "labels": [26], "selectivity": 0.02194, "lift": 0.0, "qid": 80}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 10, "q": 158, "labels": [40], "selectivity": 0.0174, "lift": 0.0, "qid": 81}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 10, "q": 159, "labels": [9], "selectivity": 0.02928, "lift": 0.0, "qid": 82}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 10, "q": 126, "labels": [21], "selectivity": 0.02268, "lift": 0.0, "qid": 83}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 10, "q": 15, "labels": [41], "selectivity": 0.01748, "lift": 0.0, "qid": 84}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 10, "q": 146, "labels": [45], "selectivity": 0.01632, "lift": 0.0, "qid": 85}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 10, "q": 138, "labels": [12], "selectivity": 0.03146, "lift": 0.0, "qid": 86}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 10, "q": 17, "labels": [39], "selectivity": 0.02258, "lift": 0.0, "qid": 87}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 10, "q": 59, "labels": [10], "selectivity": 0.03018, "lift": 0.0, "qid": 88}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 10, "q": 32, "labels": [10], "selectivity": 0.03018, "lift": 0.0, "qid": 89}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 10, "q": 114, "labels": [63], "selectivity": 0.0125, "lift": 0.0, "qid": 90}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 10, "q": 113, "labels": [39], "selectivity": 0.02258, "lift": 0.0, "qid": 91}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 10, "q": 123, "labels": [64], "selectivity": 0.0125, "lift": 0.0, "qid": 92}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 10, "q": 62, "labels": [0], "selectivity": 0.03058, "lift": 0.0, "qid": 93}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 10, "q": 58, "labels": [5], "selectivity": 0.02974, "lift": 0.0, "qid": 94}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 10, "q": 86, "labels": [5], "selectivity": 0.02974, "lift": 0.0, "qid": 95}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 10, "q": 75, "labels": [15], "selectivity": 0.02968, "lift": 0.0, "qid": 96}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 10, "q": 163, "labels": [10], "selectivity": 0.03018, "lift": 0.0, "qid": 97}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 10, "q": 187, "labels": [17], "selectivity": 0.02956, "lift": 0.0, "qid": 98}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 10, "q": 85, "labels": [19], "selectivity": 0.03034, "lift": 0.0, "qid": 99}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 100, "q": 158, "labels": [20], "selectivity": 0.0221, "lift": 0.0, "qid": 100}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 100, "q": 46, "labels": [0], "selectivity": 0.03058, "lift": 0.0, "qid": 101}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 100, "q": 117, "labels": [0], "selectivity": 0.03058, "lift": 0.0, "qid": 102}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 100, "q": 116, "labels": [36], "selectivity": 0.0226, "lift": 0.0, "qid": 103}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 100, "q": 130, "labels": [25], "selectivity": 0.02166, "lift": 0.0, "qid": 104}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 100, "q": 90, "labels": [31], "selectivity": 0.02244, "lift": 0.0, "qid": 105}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 100, "q": 22, "labels": [42], "selectivity": 0.01716, "lift": 0.0, "qid": 106}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 100, "q": 38, "labels": [60], "selectivity": 0.01228, "lift": 0.0, "qid": 107}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 100, "q": 70, "labels": [4], "selectivity": 0.03008, "lift": 0.0, "qid": 108}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 100, "q": 34, "labels": [54], "selectivity": 0.01806, "lift": 0.0, "qid": 109}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 100, "q": 140, "labels": [16], "selectivity": 0.02982, "lift": 0.0, "qid": 110}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 100, "q": 84, "labels": [50], "selectivity": 0.01716, "lift": 0.0, "qid": 111}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 100, "q": 94, "labels": [52], "selectivity": 0.01812, "lift": 0.0, "qid": 112}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 100, "q": 176, "labels": [77], "selectivity": 0.01234, "lift": 0.0, "qid": 113}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 100, "q": 127, "labels": [65], "selectivity": 0.01266, "lift": 0.0, "qid": 114}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 100, "q": 53, "labels": [35], "selectivity": 0.0227, "lift": 0.0, "qid": 115}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 100, "q": 86, "labels": [20], "selectivity": 0.0221, "lift": 0.0, "qid": 116}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 100, "q": 109, "labels": [17], "selectivity": 0.02956, "lift": 0.0, "qid": 117}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 100, "q": 29, "labels": [52], "selectivity": 0.01812, "lift": 0.0, "qid": 118}
+{"kind": "filter", "ftype": "neg", "bin": "1e-02-3e-02", "k": 100, "q": 1, "labels": [12], "selectivity": 0.03146, "lift": 0.0, "qid": 119}
+{"kind": "group_label", "bin": "1e-02-3e-02", "k": 3, "G": 10, "q": 33, "labels": [1, 9, 15, 31, 39, 52, 56, 68, 76, 79], "selectivity": 0.020898, "qid": 120}
+{"kind": "group_label", "bin": "1e-02-3e-02", "k": 3, "G": 10, "q": 124, "labels": [2, 18, 28, 37, 40, 45, 54, 63, 71, 76], "selectivity": 0.019312000000000003, "qid": 121}
+{"kind": "group_label", "bin": "1e-02-3e-02", "k": 3, "G": 10, "q": 82, "labels": [17, 23, 40, 44, 46, 47, 54, 62, 63, 68], "selectivity": 0.017558, "qid": 122}
+{"kind": "group_label", "bin": "1e-02-3e-02", "k": 3, "G": 10, "q": 165, "labels": [11, 27, 32, 33, 41, 49, 61, 64, 68, 69], "selectivity": 0.018332, "qid": 123}
+{"kind": "group_label", "bin": "1e-02-3e-02", "k": 3, "G": 10, "q": 129, "labels": [2, 11, 14, 27, 44, 45, 49, 55, 59, 76], "selectivity": 0.020758, "qid": 124}
+{"kind": "group_label", "bin": "1e-02-3e-02", "k": 3, "G": 10, "q": 57, "labels": [1, 5, 12, 19, 27, 28, 40, 57, 62, 66], "selectivity": 0.022671999999999998, "qid": 125}
+{"kind": "group_label", "bin": "1e-02-3e-02", "k": 3, "G": 10, "q": 50, "labels": [3, 5, 19, 20, 22, 34, 43, 50, 76, 92], "selectivity": 0.02128, "qid": 126}
+{"kind": "group_label", "bin": "1e-02-3e-02", "k": 3, "G": 10, "q": 100, "labels": [1, 7, 10, 34, 36, 52, 58, 59, 72, 73], "selectivity": 0.021156, "qid": 127}
+{"kind": "group_label", "bin": "1e-02-3e-02", "k": 3, "G": 10, "q": 164, "labels": [0, 8, 9, 24, 40, 42, 44, 60, 66, 79], "selectivity": 0.020166, "qid": 128}
+{"kind": "group_label", "bin": "1e-02-3e-02", "k": 3, "G": 10, "q": 182, "labels": [10, 16, 18, 22, 34, 35, 40, 42, 56, 62], "selectivity": 0.022048, "qid": 129}
+{"kind": "group_label", "bin": "1e-02-3e-02", "k": 3, "G": 10, "q": 31, "labels": [8, 11, 17, 23, 35, 43, 48, 49, 57, 73], "selectivity": 0.02135, "qid": 130}
+{"kind": "group_label", "bin": "1e-02-3e-02", "k": 3, "G": 10, "q": 140, "labels": [8, 10, 20, 31, 33, 45, 48, 56, 62, 73], "selectivity": 0.020536, "qid": 131}
+{"kind": "group_label", "bin": "1e-02-3e-02", "k": 3, "G": 10, "q": 169, "labels": [1, 14, 19, 31, 35, 61, 63, 68, 69, 92], "selectivity": 0.019569999999999997, "qid": 132}
+{"kind": "group_label", "bin": "1e-02-3e-02", "k": 3, "G": 10, "q": 134, "labels": [9, 21, 32, 39, 45, 58, 64, 68, 71, 75], "selectivity": 0.018182, "qid": 133}
+{"kind": "group_label", "bin": "1e-02-3e-02", "k": 3, "G": 10, "q": 150, "labels": [9, 16, 25, 26, 34, 35, 52, 62, 66, 76], "selectivity": 0.020242, "qid": 134}
+{"kind": "group_label", "bin": "1e-02-3e-02", "k": 3, "G": 10, "q": 49, "labels": [1, 6, 10, 20, 33, 48, 56, 63, 77, 79], "selectivity": 0.020904, "qid": 135}
+{"kind": "group_label", "bin": "1e-02-3e-02", "k": 3, "G": 10, "q": 195, "labels": [4, 7, 10, 19, 26, 44, 61, 63, 71, 73], "selectivity": 0.020983999999999996, "qid": 136}
+{"kind": "group_label", "bin": "1e-02-3e-02", "k": 3, "G": 10, "q": 55, "labels": [1, 6, 12, 15, 16, 28, 36, 56, 64, 76], "selectivity": 0.024030000000000003, "qid": 137}
+{"kind": "group_label", "bin": "1e-02-3e-02", "k": 3, "G": 10, "q": 2, "labels": [1, 28, 29, 38, 40, 52, 54, 55, 58, 62], "selectivity": 0.019656, "qid": 138}
+{"kind": "group_label", "bin": "1e-02-3e-02", "k": 3, "G": 10, "q": 66, "labels": [24, 40, 50, 51, 54, 72, 73, 75, 76, 78], "selectivity": 0.015442000000000003, "qid": 139}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 10, "q": 168, "labels": [106], "selectivity": 0.00676, "lift": 20.85798816568047, "qid": 140}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 10, "q": 196, "labels": [110], "selectivity": 0.00654, "lift": 19.418960244648318, "qid": 141}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 10, "q": 64, "labels": [148], "selectivity": 0.0043, "lift": 16.27906976744186, "qid": 142}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 10, "q": 42, "labels": [88], "selectivity": 0.00998, "lift": 21.442885771543086, "qid": 143}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 10, "q": 172, "labels": [146], "selectivity": 0.0038, "lift": 18.42105263157895, "qid": 144}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 10, "q": 113, "labels": [124], "selectivity": 0.00514, "lift": 18.482490272373543, "qid": 145}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 10, "q": 36, "labels": [120], "selectivity": 0.00502, "lift": 22.111553784860558, "qid": 146}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 10, "q": 61, "labels": [88], "selectivity": 0.00998, "lift": 20.64128256513026, "qid": 147}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 10, "q": 67, "labels": [116], "selectivity": 0.00708, "lift": 19.350282485875706, "qid": 148}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 10, "q": 100, "labels": [83], "selectivity": 0.0096, "lift": 18.75, "qid": 149}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 10, "q": 68, "labels": [89], "selectivity": 0.0096, "lift": 21.979166666666668, "qid": 150}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 10, "q": 81, "labels": [149], "selectivity": 0.00414, "lift": 21.980676328502415, "qid": 151}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 10, "q": 76, "labels": [100], "selectivity": 0.00716, "lift": 20.11173184357542, "qid": 152}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 10, "q": 50, "labels": [127], "selectivity": 0.00624, "lift": 19.71153846153846, "qid": 153}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 10, "q": 10, "labels": [112], "selectivity": 0.00766, "lift": 18.929503916449086, "qid": 154}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 10, "q": 55, "labels": [150], "selectivity": 0.00454, "lift": 19.162995594713657, "qid": 155}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 10, "q": 182, "labels": [91], "selectivity": 0.0094, "lift": 19.78723404255319, "qid": 156}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 10, "q": 17, "labels": [103], "selectivity": 0.00698, "lift": 20.773638968481375, "qid": 157}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 10, "q": 4, "labels": [104], "selectivity": 0.00756, "lift": 20.37037037037037, "qid": 158}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 10, "q": 51, "labels": [82], "selectivity": 0.00904, "lift": 19.24778761061947, "qid": 159}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 100, "q": 76, "labels": [100], "selectivity": 0.00716, "lift": 20.11173184357542, "qid": 160}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 100, "q": 17, "labels": [103], "selectivity": 0.00698, "lift": 20.773638968481375, "qid": 161}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 100, "q": 143, "labels": [99], "selectivity": 0.00938, "lift": 19.61620469083156, "qid": 162}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 100, "q": 63, "labels": [117], "selectivity": 0.00756, "lift": 22.222222222222225, "qid": 163}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 100, "q": 115, "labels": [115], "selectivity": 0.00704, "lift": 19.460227272727273, "qid": 164}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 100, "q": 94, "labels": [90], "selectivity": 0.0095, "lift": 19.263157894736842, "qid": 165}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 100, "q": 136, "labels": [146], "selectivity": 0.0038, "lift": 20.263157894736842, "qid": 166}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 100, "q": 14, "labels": [117], "selectivity": 0.00756, "lift": 19.973544973544975, "qid": 167}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 100, "q": 97, "labels": [83], "selectivity": 0.0096, "lift": 19.270833333333336, "qid": 168}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 100, "q": 181, "labels": [82], "selectivity": 0.00904, "lift": 20.575221238938056, "qid": 169}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 100, "q": 3, "labels": [100], "selectivity": 0.00716, "lift": 18.435754189944134, "qid": 170}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 100, "q": 165, "labels": [80], "selectivity": 0.00998, "lift": 19.839679358717436, "qid": 171}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 100, "q": 173, "labels": [106], "selectivity": 0.00676, "lift": 17.899408284023668, "qid": 172}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 100, "q": 100, "labels": [103], "selectivity": 0.00698, "lift": 20.487106017191977, "qid": 173}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 100, "q": 34, "labels": [108], "selectivity": 0.0069, "lift": 21.594202898550723, "qid": 174}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 100, "q": 50, "labels": [87], "selectivity": 0.00946, "lift": 19.661733615221987, "qid": 175}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 100, "q": 61, "labels": [88], "selectivity": 0.00998, "lift": 20.64128256513026, "qid": 176}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 100, "q": 148, "labels": [86], "selectivity": 0.00958, "lift": 19.832985386221296, "qid": 177}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 100, "q": 10, "labels": [112], "selectivity": 0.00766, "lift": 18.929503916449086, "qid": 178}
+{"kind": "filter", "ftype": "pos", "bin": "3e-03-1e-02", "k": 100, "q": 4, "labels": [104], "selectivity": 0.00756, "lift": 20.37037037037037, "qid": 179}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 10, "q": 145, "labels": [157], "selectivity": 0.0038, "lift": 0.0, "qid": 180}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 10, "q": 28, "labels": [151], "selectivity": 0.00396, "lift": 0.0, "qid": 181}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 10, "q": 117, "labels": [104], "selectivity": 0.00756, "lift": 0.0, "qid": 182}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 10, "q": 13, "labels": [94], "selectivity": 0.00938, "lift": 0.0, "qid": 183}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 10, "q": 134, "labels": [172], "selectivity": 0.00324, "lift": 0.0, "qid": 184}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 10, "q": 127, "labels": [93], "selectivity": 0.00978, "lift": 0.0, "qid": 185}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 10, "q": 169, "labels": [124], "selectivity": 0.00514, "lift": 0.0, "qid": 186}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 10, "q": 83, "labels": [100], "selectivity": 0.00716, "lift": 0.0, "qid": 187}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 10, "q": 72, "labels": [146], "selectivity": 0.0038, "lift": 0.0, "qid": 188}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 10, "q": 135, "labels": [153], "selectivity": 0.00428, "lift": 0.0, "qid": 189}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 10, "q": 90, "labels": [137], "selectivity": 0.0058, "lift": 0.0, "qid": 190}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 10, "q": 148, "labels": [145], "selectivity": 0.0041, "lift": 0.0, "qid": 191}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 10, "q": 191, "labels": [123], "selectivity": 0.00536, "lift": 0.0, "qid": 192}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 10, "q": 16, "labels": [108], "selectivity": 0.0069, "lift": 0.0, "qid": 193}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 10, "q": 67, "labels": [81], "selectivity": 0.00998, "lift": 0.0, "qid": 194}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 10, "q": 9, "labels": [164], "selectivity": 0.0032, "lift": 0.0, "qid": 195}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 10, "q": 176, "labels": [126], "selectivity": 0.00512, "lift": 0.0, "qid": 196}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 10, "q": 0, "labels": [153], "selectivity": 0.00428, "lift": 0.0, "qid": 197}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 10, "q": 64, "labels": [113], "selectivity": 0.00714, "lift": 0.0, "qid": 198}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 10, "q": 140, "labels": [107], "selectivity": 0.0078, "lift": 0.0, "qid": 199}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 100, "q": 157, "labels": [127], "selectivity": 0.00624, "lift": 0.0, "qid": 200}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 100, "q": 155, "labels": [104], "selectivity": 0.00756, "lift": 0.0, "qid": 201}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 100, "q": 84, "labels": [96], "selectivity": 0.00902, "lift": 0.0, "qid": 202}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 100, "q": 17, "labels": [149], "selectivity": 0.00414, "lift": 0.0, "qid": 203}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 100, "q": 96, "labels": [123], "selectivity": 0.00536, "lift": 0.0, "qid": 204}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 100, "q": 164, "labels": [110], "selectivity": 0.00654, "lift": 0.0, "qid": 205}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 100, "q": 2, "labels": [81], "selectivity": 0.00998, "lift": 0.0, "qid": 206}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 100, "q": 7, "labels": [139], "selectivity": 0.0055, "lift": 0.0, "qid": 207}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 100, "q": 67, "labels": [158], "selectivity": 0.00358, "lift": 0.0, "qid": 208}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 100, "q": 115, "labels": [130], "selectivity": 0.00508, "lift": 0.0, "qid": 209}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 100, "q": 36, "labels": [176], "selectivity": 0.00342, "lift": 0.0, "qid": 210}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 100, "q": 4, "labels": [89], "selectivity": 0.0096, "lift": 0.0, "qid": 211}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 100, "q": 159, "labels": [151], "selectivity": 0.00396, "lift": 0.0, "qid": 212}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 100, "q": 57, "labels": [102], "selectivity": 0.00752, "lift": 19.680851063829788, "qid": 213}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 100, "q": 55, "labels": [145], "selectivity": 0.0041, "lift": 0.0, "qid": 214}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 100, "q": 12, "labels": [147], "selectivity": 0.00408, "lift": 0.0, "qid": 215}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 100, "q": 93, "labels": [97], "selectivity": 0.0099, "lift": 0.0, "qid": 216}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 100, "q": 41, "labels": [112], "selectivity": 0.00766, "lift": 0.0, "qid": 217}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 100, "q": 165, "labels": [113], "selectivity": 0.00714, "lift": 0.0, "qid": 218}
+{"kind": "filter", "ftype": "rand", "bin": "3e-03-1e-02", "k": 100, "q": 81, "labels": [159], "selectivity": 0.00414, "lift": 0.0, "qid": 219}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 10, "q": 167, "labels": [95], "selectivity": 0.0091, "lift": 0.0, "qid": 220}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 10, "q": 15, "labels": [101], "selectivity": 0.007, "lift": 0.0, "qid": 221}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 10, "q": 75, "labels": [135], "selectivity": 0.00504, "lift": 0.0, "qid": 222}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 10, "q": 147, "labels": [87], "selectivity": 0.00946, "lift": 0.0, "qid": 223}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 10, "q": 13, "labels": [108], "selectivity": 0.0069, "lift": 0.0, "qid": 224}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 10, "q": 158, "labels": [115], "selectivity": 0.00704, "lift": 0.0, "qid": 225}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 10, "q": 153, "labels": [159], "selectivity": 0.00414, "lift": 0.0, "qid": 226}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 10, "q": 10, "labels": [104], "selectivity": 0.00756, "lift": 0.0, "qid": 227}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 10, "q": 32, "labels": [112], "selectivity": 0.00766, "lift": 0.0, "qid": 228}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 10, "q": 194, "labels": [81], "selectivity": 0.00998, "lift": 0.0, "qid": 229}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 10, "q": 133, "labels": [87], "selectivity": 0.00946, "lift": 0.0, "qid": 230}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 10, "q": 82, "labels": [104], "selectivity": 0.00756, "lift": 0.0, "qid": 231}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 10, "q": 4, "labels": [100], "selectivity": 0.00716, "lift": 0.0, "qid": 232}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 10, "q": 54, "labels": [135], "selectivity": 0.00504, "lift": 0.0, "qid": 233}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 10, "q": 58, "labels": [148], "selectivity": 0.0043, "lift": 0.0, "qid": 234}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 10, "q": 68, "labels": [86], "selectivity": 0.00958, "lift": 0.0, "qid": 235}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 10, "q": 24, "labels": [88], "selectivity": 0.00998, "lift": 0.0, "qid": 236}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 10, "q": 191, "labels": [90], "selectivity": 0.0095, "lift": 0.0, "qid": 237}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 10, "q": 92, "labels": [107], "selectivity": 0.0078, "lift": 0.0, "qid": 238}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 10, "q": 16, "labels": [88], "selectivity": 0.00998, "lift": 0.0, "qid": 239}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 100, "q": 155, "labels": [95], "selectivity": 0.0091, "lift": 0.0, "qid": 240}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 100, "q": 2, "labels": [111], "selectivity": 0.0069, "lift": 0.0, "qid": 241}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 100, "q": 29, "labels": [106], "selectivity": 0.00676, "lift": 0.0, "qid": 242}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 100, "q": 166, "labels": [165], "selectivity": 0.00324, "lift": 0.0, "qid": 243}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 100, "q": 90, "labels": [96], "selectivity": 0.00902, "lift": 0.0, "qid": 244}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 100, "q": 70, "labels": [86], "selectivity": 0.00958, "lift": 0.0, "qid": 245}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 100, "q": 64, "labels": [104], "selectivity": 0.00756, "lift": 0.0, "qid": 246}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 100, "q": 192, "labels": [95], "selectivity": 0.0091, "lift": 0.0, "qid": 247}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 100, "q": 120, "labels": [99], "selectivity": 0.00938, "lift": 0.0, "qid": 248}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 100, "q": 147, "labels": [80], "selectivity": 0.00998, "lift": 0.0, "qid": 249}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 100, "q": 130, "labels": [86], "selectivity": 0.00958, "lift": 0.0, "qid": 250}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 100, "q": 197, "labels": [122], "selectivity": 0.00528, "lift": 0.0, "qid": 251}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 100, "q": 32, "labels": [89], "selectivity": 0.0096, "lift": 0.0, "qid": 252}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 100, "q": 68, "labels": [84], "selectivity": 0.0099, "lift": 0.0, "qid": 253}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 100, "q": 99, "labels": [111], "selectivity": 0.0069, "lift": 0.0, "qid": 254}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 100, "q": 176, "labels": [100], "selectivity": 0.00716, "lift": 0.0, "qid": 255}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 100, "q": 65, "labels": [97], "selectivity": 0.0099, "lift": 0.0, "qid": 256}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 100, "q": 69, "labels": [85], "selectivity": 0.00938, "lift": 0.0, "qid": 257}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 100, "q": 27, "labels": [124], "selectivity": 0.00514, "lift": 0.0, "qid": 258}
+{"kind": "filter", "ftype": "neg", "bin": "3e-03-1e-02", "k": 100, "q": 137, "labels": [165], "selectivity": 0.00324, "lift": 0.0, "qid": 259}
+{"kind": "group_label", "bin": "3e-03-1e-02", "k": 3, "G": 10, "q": 50, "labels": [85, 109, 119, 123, 132, 137, 151, 153, 155, 158], "selectivity": 0.0055720000000000006, "qid": 260}
+{"kind": "group_label", "bin": "3e-03-1e-02", "k": 3, "G": 10, "q": 58, "labels": [81, 116, 120, 126, 130, 136, 142, 146, 159, 168], "selectivity": 0.005311999999999999, "qid": 261}
+{"kind": "group_label", "bin": "3e-03-1e-02", "k": 3, "G": 10, "q": 69, "labels": [84, 90, 107, 111, 125, 138, 151, 156, 158, 176], "selectivity": 0.00597, "qid": 262}
+{"kind": "group_label", "bin": "3e-03-1e-02", "k": 3, "G": 10, "q": 6, "labels": [82, 85, 98, 111, 121, 124, 139, 144, 146, 152], "selectivity": 0.006277999999999999, "qid": 263}
+{"kind": "group_label", "bin": "3e-03-1e-02", "k": 3, "G": 10, "q": 76, "labels": [90, 93, 98, 104, 118, 133, 136, 145, 149, 159], "selectivity": 0.006644, "qid": 264}
+{"kind": "group_label", "bin": "3e-03-1e-02", "k": 3, "G": 10, "q": 172, "labels": [94, 98, 102, 115, 119, 122, 128, 135, 143, 148], "selectivity": 0.00633, "qid": 265}
+{"kind": "group_label", "bin": "3e-03-1e-02", "k": 3, "G": 10, "q": 186, "labels": [87, 95, 103, 121, 126, 130, 142, 148, 149, 150], "selectivity": 0.005822, "qid": 266}
+{"kind": "group_label", "bin": "3e-03-1e-02", "k": 3, "G": 10, "q": 24, "labels": [89, 95, 114, 124, 128, 129, 138, 147, 176, 179], "selectivity": 0.005696, "qid": 267}
+{"kind": "group_label", "bin": "3e-03-1e-02", "k": 3, "G": 10, "q": 53, "labels": [82, 84, 112, 121, 124, 136, 146, 147, 158, 168], "selectivity": 0.0057680000000000006, "qid": 268}
+{"kind": "group_label", "bin": "3e-03-1e-02", "k": 3, "G": 10, "q": 189, "labels": [82, 83, 91, 108, 111, 115, 124, 142, 146, 165], "selectivity": 0.006501999999999999, "qid": 269}
+{"kind": "group_label", "bin": "3e-03-1e-02", "k": 3, "G": 10, "q": 159, "labels": [83, 87, 90, 104, 116, 119, 121, 124, 137, 156], "selectivity": 0.006985999999999999, "qid": 270}
+{"kind": "group_label", "bin": "3e-03-1e-02", "k": 3, "G": 10, "q": 90, "labels": [81, 82, 91, 111, 128, 132, 146, 150, 156, 179], "selectivity": 0.006092, "qid": 271}
+{"kind": "group_label", "bin": "3e-03-1e-02", "k": 3, "G": 10, "q": 10, "labels": [93, 95, 98, 99, 116, 128, 134, 142, 153, 156], "selectivity": 0.006654, "qid": 272}
+{"kind": "group_label", "bin": "3e-03-1e-02", "k": 3, "G": 10, "q": 117, "labels": [86, 95, 96, 99, 106, 116, 122, 138, 150, 159], "selectivity": 0.007020000000000001, "qid": 273}
+{"kind": "group_label", "bin": "3e-03-1e-02", "k": 3, "G": 10, "q": 67, "labels": [80, 105, 110, 114, 123, 124, 125, 131, 135, 138], "selectivity": 0.0063100000000000005, "qid": 274}
+{"kind": "group_label", "bin": "3e-03-1e-02", "k": 3, "G": 10, "q": 118, "labels": [80, 86, 87, 93, 125, 129, 136, 144, 149, 164], "selectivity": 0.006658, "qid": 275}
+{"kind": "group_label", "bin": "3e-03-1e-02", "k": 3, "G": 10, "q": 128, "labels": [85, 87, 107, 112, 115, 118, 129, 136, 140, 179], "selectivity": 0.006672, "qid": 276}
+{"kind": "group_label", "bin": "3e-03-1e-02", "k": 3, "G": 10, "q": 91, "labels": [98, 107, 108, 110, 113, 115, 129, 134, 157, 165], "selectivity": 0.006188, "qid": 277}
+{"kind": "group_label", "bin": "3e-03-1e-02", "k": 3, "G": 10, "q": 174, "labels": [85, 90, 97, 123, 126, 139, 140, 146, 150, 158], "selectivity": 0.006098000000000001, "qid": 278}
+{"kind": "group_label", "bin": "3e-03-1e-02", "k": 3, "G": 10, "q": 158, "labels": [83, 85, 89, 93, 97, 110, 111, 131, 155, 179], "selectivity": 0.007424, "qid": 279}
+{"kind": "filter", "ftype": "pos", "bin": "1e-03-3e-03", "k": 10, "q": 153, "labels": [163], "selectivity": 0.003, "lift": 20.666666666666668, "qid": 280}
+{"kind": "filter", "ftype": "pos", "bin": "1e-03-3e-03", "k": 10, "q": 59, "labels": [174], "selectivity": 0.0031, "lift": 20.64516129032258, "qid": 281}
+{"kind": "filter", "ftype": "pos", "bin": "1e-03-3e-03", "k": 10, "q": 86, "labels": [196], "selectivity": 0.00236, "lift": 17.796610169491526, "qid": 282}
+{"kind": "filter", "ftype": "pos", "bin": "1e-03-3e-03", "k": 10, "q": 79, "labels": [196], "selectivity": 0.00236, "lift": 20.338983050847457, "qid": 283}
+{"kind": "filter", "ftype": "pos", "bin": "1e-03-3e-03", "k": 10, "q": 85, "labels": [175], "selectivity": 0.00276, "lift": 21.3768115942029, "qid": 284}
+{"kind": "filter", "ftype": "pos", "bin": "1e-03-3e-03", "k": 10, "q": 136, "labels": [166], "selectivity": 0.00288, "lift": 22.22222222222222, "qid": 285}
+{"kind": "filter", "ftype": "pos", "bin": "1e-03-3e-03", "k": 10, "q": 53, "labels": [193], "selectivity": 0.00252, "lift": 21.825396825396826, "qid": 286}
+{"kind": "filter", "ftype": "pos", "bin": "1e-03-3e-03", "k": 10, "q": 116, "labels": [169], "selectivity": 0.00264, "lift": 24.242424242424242, "qid": 287}
+{"kind": "filter", "ftype": "pos", "bin": "1e-03-3e-03", "k": 10, "q": 16, "labels": [182], "selectivity": 0.00238, "lift": 22.6890756302521, "qid": 288}
+{"kind": "filter", "ftype": "pos", "bin": "1e-03-3e-03", "k": 10, "q": 57, "labels": [182], "selectivity": 0.00238, "lift": 17.22689075630252, "qid": 289}
+{"kind": "filter", "ftype": "pos", "bin": "1e-03-3e-03", "k": 10, "q": 78, "labels": [175], "selectivity": 0.00276, "lift": 22.826086956521742, "qid": 290}
+{"kind": "filter", "ftype": "pos", "bin": "1e-03-3e-03", "k": 10, "q": 115, "labels": [175], "selectivity": 0.00276, "lift": 18.115942028985508, "qid": 291}
+{"kind": "filter", "ftype": "pos", "bin": "1e-03-3e-03", "k": 10, "q": 161, "labels": [169], "selectivity": 0.00264, "lift": 17.803030303030305, "qid": 292}
+{"kind": "filter", "ftype": "pos", "bin": "1e-03-3e-03", "k": 10, "q": 30, "labels": [183], "selectivity": 0.00218, "lift": 18.807339449541285, "qid": 293}
+{"kind": "filter", "ftype": "pos", "bin": "1e-03-3e-03", "k": 10, "q": 152, "labels": [188], "selectivity": 0.00204, "lift": 21.56862745098039, "qid": 294}
+{"kind": "filter", "ftype": "pos", "bin": "1e-03-3e-03", "k": 10, "q": 139, "labels": [194], "selectivity": 0.00198, "lift": 17.67676767676768, "qid": 295}
+{"kind": "filter", "ftype": "pos", "bin": "1e-03-3e-03", "k": 100, "q": 53, "labels": [173], "selectivity": 0.00306, "lift": 18.300653594771244, "qid": 296}
+{"kind": "filter", "ftype": "pos", "bin": "1e-03-3e-03", "k": 100, "q": 116, "labels": [169], "selectivity": 0.00264, "lift": 24.242424242424242, "qid": 297}
+{"kind": "filter", "ftype": "pos", "bin": "1e-03-3e-03", "k": 100, "q": 153, "labels": [163], "selectivity": 0.003, "lift": 20.666666666666668, "qid": 298}
+{"kind": "filter", "ftype": "pos", "bin": "1e-03-3e-03", "k": 100, "q": 161, "labels": [169], "selectivity": 0.00264, "lift": 17.803030303030305, "qid": 299}
+{"kind": "filter", "ftype": "pos", "bin": "1e-03-3e-03", "k": 100, "q": 57, "labels": [182], "selectivity": 0.00238, "lift": 17.22689075630252, "qid": 300}
+{"kind": "filter", "ftype": "pos", "bin": "1e-03-3e-03", "k": 100, "q": 16, "labels": [182], "selectivity": 0.00238, "lift": 22.6890756302521, "qid": 301}
+{"kind": "filter", "ftype": "pos", "bin": "1e-03-3e-03", "k": 100, "q": 30, "labels": [183], "selectivity": 0.00218, "lift": 18.807339449541285, "qid": 302}
+{"kind": "filter", "ftype": "pos", "bin": "1e-03-3e-03", "k": 100, "q": 78, "labels": [175], "selectivity": 0.00276, "lift": 22.826086956521742, "qid": 303}
+{"kind": "filter", "ftype": "pos", "bin": "1e-03-3e-03", "k": 100, "q": 86, "labels": [196], "selectivity": 0.00236, "lift": 17.796610169491526, "qid": 304}
+{"kind": "filter", "ftype": "pos", "bin": "1e-03-3e-03", "k": 100, "q": 59, "labels": [174], "selectivity": 0.0031, "lift": 20.64516129032258, "qid": 305}
+{"kind": "filter", "ftype": "pos", "bin": "1e-03-3e-03", "k": 100, "q": 79, "labels": [196], "selectivity": 0.00236, "lift": 20.338983050847457, "qid": 306}
+{"kind": "filter", "ftype": "pos", "bin": "1e-03-3e-03", "k": 100, "q": 136, "labels": [166], "selectivity": 0.00288, "lift": 22.22222222222222, "qid": 307}
+{"kind": "filter", "ftype": "pos", "bin": "1e-03-3e-03", "k": 100, "q": 115, "labels": [175], "selectivity": 0.00276, "lift": 18.115942028985508, "qid": 308}
+{"kind": "filter", "ftype": "pos", "bin": "1e-03-3e-03", "k": 100, "q": 85, "labels": [175], "selectivity": 0.00276, "lift": 21.3768115942029, "qid": 309}
+{"kind": "filter", "ftype": "pos", "bin": "1e-03-3e-03", "k": 100, "q": 152, "labels": [188], "selectivity": 0.00204, "lift": 21.56862745098039, "qid": 310}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 10, "q": 45, "labels": [177], "selectivity": 0.00262, "lift": 0.0, "qid": 311}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 10, "q": 86, "labels": [154], "selectivity": 0.00316, "lift": 0.0, "qid": 312}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 10, "q": 147, "labels": [170], "selectivity": 0.00296, "lift": 0.0, "qid": 313}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 10, "q": 4, "labels": [188], "selectivity": 0.00204, "lift": 0.0, "qid": 314}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 10, "q": 6, "labels": [174], "selectivity": 0.0031, "lift": 0.0, "qid": 315}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 10, "q": 1, "labels": [169], "selectivity": 0.00264, "lift": 0.0, "qid": 316}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 10, "q": 193, "labels": [184], "selectivity": 0.00188, "lift": 0.0, "qid": 317}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 10, "q": 22, "labels": [177], "selectivity": 0.00262, "lift": 0.0, "qid": 318}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 10, "q": 184, "labels": [161], "selectivity": 0.00292, "lift": 0.0, "qid": 319}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 10, "q": 79, "labels": [170], "selectivity": 0.00296, "lift": 0.0, "qid": 320}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 10, "q": 94, "labels": [187], "selectivity": 0.00202, "lift": 0.0, "qid": 321}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 10, "q": 123, "labels": [180], "selectivity": 0.00206, "lift": 0.0, "qid": 322}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 10, "q": 114, "labels": [183], "selectivity": 0.00218, "lift": 0.0, "qid": 323}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 10, "q": 135, "labels": [193], "selectivity": 0.00252, "lift": 0.0, "qid": 324}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 10, "q": 48, "labels": [173], "selectivity": 0.00306, "lift": 0.0, "qid": 325}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 10, "q": 14, "labels": [160], "selectivity": 0.00262, "lift": 0.0, "qid": 326}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 10, "q": 196, "labels": [169], "selectivity": 0.00264, "lift": 0.0, "qid": 327}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 10, "q": 26, "labels": [195], "selectivity": 0.00192, "lift": 0.0, "qid": 328}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 10, "q": 3, "labels": [178], "selectivity": 0.00312, "lift": 0.0, "qid": 329}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 10, "q": 56, "labels": [171], "selectivity": 0.00288, "lift": 0.0, "qid": 330}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 100, "q": 99, "labels": [154], "selectivity": 0.00316, "lift": 0.0, "qid": 331}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 100, "q": 16, "labels": [197], "selectivity": 0.00204, "lift": 0.0, "qid": 332}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 100, "q": 43, "labels": [199], "selectivity": 0.0021, "lift": 0.0, "qid": 333}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 100, "q": 106, "labels": [188], "selectivity": 0.00204, "lift": 20.58823529411765, "qid": 334}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 100, "q": 172, "labels": [180], "selectivity": 0.00206, "lift": 0.0, "qid": 335}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 100, "q": 15, "labels": [182], "selectivity": 0.00238, "lift": 0.0, "qid": 336}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 100, "q": 8, "labels": [182], "selectivity": 0.00238, "lift": 0.0, "qid": 337}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 100, "q": 123, "labels": [192], "selectivity": 0.00228, "lift": 0.0, "qid": 338}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 100, "q": 54, "labels": [161], "selectivity": 0.00292, "lift": 0.0, "qid": 339}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 100, "q": 14, "labels": [175], "selectivity": 0.00276, "lift": 0.0, "qid": 340}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 100, "q": 193, "labels": [182], "selectivity": 0.00238, "lift": 0.0, "qid": 341}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 100, "q": 196, "labels": [178], "selectivity": 0.00312, "lift": 0.0, "qid": 342}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 100, "q": 168, "labels": [170], "selectivity": 0.00296, "lift": 0.0, "qid": 343}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 100, "q": 159, "labels": [193], "selectivity": 0.00252, "lift": 0.0, "qid": 344}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 100, "q": 33, "labels": [186], "selectivity": 0.00206, "lift": 0.0, "qid": 345}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 100, "q": 37, "labels": [160], "selectivity": 0.00262, "lift": 0.0, "qid": 346}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 100, "q": 41, "labels": [173], "selectivity": 0.00306, "lift": 0.0, "qid": 347}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 100, "q": 183, "labels": [192], "selectivity": 0.00228, "lift": 0.0, "qid": 348}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 100, "q": 163, "labels": [167], "selectivity": 0.003, "lift": 0.0, "qid": 349}
+{"kind": "filter", "ftype": "rand", "bin": "1e-03-3e-03", "k": 100, "q": 119, "labels": [191], "selectivity": 0.00274, "lift": 0.0, "qid": 350}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 10, "q": 188, "labels": [181], "selectivity": 0.00266, "lift": 0.0, "qid": 351}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 10, "q": 35, "labels": [180], "selectivity": 0.00206, "lift": 0.0, "qid": 352}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 10, "q": 103, "labels": [191], "selectivity": 0.00274, "lift": 0.0, "qid": 353}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 10, "q": 5, "labels": [171], "selectivity": 0.00288, "lift": 0.0, "qid": 354}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 10, "q": 109, "labels": [194], "selectivity": 0.00198, "lift": 0.0, "qid": 355}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 10, "q": 87, "labels": [178], "selectivity": 0.00312, "lift": 0.0, "qid": 356}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 10, "q": 33, "labels": [169], "selectivity": 0.00264, "lift": 0.0, "qid": 357}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 10, "q": 60, "labels": [192], "selectivity": 0.00228, "lift": 0.0, "qid": 358}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 10, "q": 144, "labels": [185], "selectivity": 0.0024, "lift": 0.0, "qid": 359}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 10, "q": 26, "labels": [186], "selectivity": 0.00206, "lift": 0.0, "qid": 360}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 10, "q": 49, "labels": [170], "selectivity": 0.00296, "lift": 0.0, "qid": 361}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 10, "q": 108, "labels": [180], "selectivity": 0.00206, "lift": 0.0, "qid": 362}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 10, "q": 1, "labels": [166], "selectivity": 0.00288, "lift": 0.0, "qid": 363}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 10, "q": 86, "labels": [192], "selectivity": 0.00228, "lift": 0.0, "qid": 364}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 10, "q": 149, "labels": [194], "selectivity": 0.00198, "lift": 0.0, "qid": 365}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 10, "q": 116, "labels": [174], "selectivity": 0.0031, "lift": 0.0, "qid": 366}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 10, "q": 99, "labels": [184], "selectivity": 0.00188, "lift": 0.0, "qid": 367}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 10, "q": 170, "labels": [193], "selectivity": 0.00252, "lift": 0.0, "qid": 368}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 10, "q": 100, "labels": [181], "selectivity": 0.00266, "lift": 0.0, "qid": 369}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 10, "q": 18, "labels": [182], "selectivity": 0.00238, "lift": 0.0, "qid": 370}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 100, "q": 14, "labels": [180], "selectivity": 0.00206, "lift": 0.0, "qid": 371}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 100, "q": 51, "labels": [199], "selectivity": 0.0021, "lift": 0.0, "qid": 372}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 100, "q": 67, "labels": [162], "selectivity": 0.0031, "lift": 0.0, "qid": 373}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 100, "q": 197, "labels": [175], "selectivity": 0.00276, "lift": 0.0, "qid": 374}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 100, "q": 166, "labels": [175], "selectivity": 0.00276, "lift": 0.0, "qid": 375}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 100, "q": 150, "labels": [173], "selectivity": 0.00306, "lift": 0.0, "qid": 376}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 100, "q": 8, "labels": [183], "selectivity": 0.00218, "lift": 0.0, "qid": 377}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 100, "q": 190, "labels": [182], "selectivity": 0.00238, "lift": 0.0, "qid": 378}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 100, "q": 106, "labels": [199], "selectivity": 0.0021, "lift": 0.0, "qid": 379}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 100, "q": 160, "labels": [167], "selectivity": 0.003, "lift": 0.0, "qid": 380}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 100, "q": 184, "labels": [166], "selectivity": 0.00288, "lift": 0.0, "qid": 381}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 100, "q": 58, "labels": [163], "selectivity": 0.003, "lift": 0.0, "qid": 382}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 100, "q": 103, "labels": [191], "selectivity": 0.00274, "lift": 0.0, "qid": 383}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 100, "q": 68, "labels": [197], "selectivity": 0.00204, "lift": 0.0, "qid": 384}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 100, "q": 47, "labels": [180], "selectivity": 0.00206, "lift": 0.0, "qid": 385}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 100, "q": 72, "labels": [166], "selectivity": 0.00288, "lift": 0.0, "qid": 386}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 100, "q": 49, "labels": [170], "selectivity": 0.00296, "lift": 0.0, "qid": 387}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 100, "q": 161, "labels": [163], "selectivity": 0.003, "lift": 0.0, "qid": 388}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 100, "q": 39, "labels": [167], "selectivity": 0.003, "lift": 0.0, "qid": 389}
+{"kind": "filter", "ftype": "neg", "bin": "1e-03-3e-03", "k": 100, "q": 69, "labels": [190], "selectivity": 0.00228, "lift": 0.0, "qid": 390}
+{"kind": "group_label", "bin": "1e-03-3e-03", "k": 3, "G": 10, "q": 64, "labels": [162, 171, 174, 181, 184, 185, 188, 190, 194, 198], "selectivity": 0.0024660000000000003, "qid": 391}
+{"kind": "group_label", "bin": "1e-03-3e-03", "k": 3, "G": 10, "q": 119, "labels": [162, 166, 169, 171, 173, 178, 182, 183, 184, 187], "selectivity": 0.002614, "qid": 392}
+{"kind": "group_label", "bin": "1e-03-3e-03", "k": 3, "G": 10, "q": 120, "labels": [154, 160, 163, 174, 175, 178, 182, 184, 189, 199], "selectivity": 0.002614, "qid": 393}
+{"kind": "group_label", "bin": "1e-03-3e-03", "k": 3, "G": 10, "q": 191, "labels": [160, 163, 167, 169, 177, 178, 193, 194, 197, 199], "selectivity": 0.002564, "qid": 394}
+{"kind": "group_label", "bin": "1e-03-3e-03", "k": 3, "G": 10, "q": 161, "labels": [160, 161, 163, 174, 180, 183, 186, 195, 197, 198], "selectivity": 0.0024240000000000004, "qid": 395}
+{"kind": "group_label", "bin": "1e-03-3e-03", "k": 3, "G": 10, "q": 59, "labels": [160, 163, 166, 169, 171, 173, 180, 181, 183, 196], "selectivity": 0.002634, "qid": 396}
+{"kind": "group_label", "bin": "1e-03-3e-03", "k": 3, "G": 10, "q": 88, "labels": [173, 180, 183, 185, 187, 189, 191, 192, 193, 197], "selectivity": 0.002332, "qid": 397}
+{"kind": "group_label", "bin": "1e-03-3e-03", "k": 3, "G": 10, "q": 92, "labels": [154, 160, 173, 177, 178, 182, 186, 187, 189, 193], "selectivity": 0.0025580000000000004, "qid": 398}
+{"kind": "group_label", "bin": "1e-03-3e-03", "k": 3, "G": 10, "q": 136, "labels": [160, 161, 170, 173, 183, 187, 188, 191, 198, 199], "selectivity": 0.002498, "qid": 399}
+{"kind": "group_label", "bin": "1e-03-3e-03", "k": 3, "G": 10, "q": 63, "labels": [154, 163, 167, 171, 174, 177, 187, 191, 192, 197], "selectivity": 0.0026839999999999998, "qid": 400}
+{"kind": "group_label", "bin": "1e-03-3e-03", "k": 3, "G": 10, "q": 45, "labels": [163, 169, 170, 177, 180, 184, 190, 192, 195, 196], "selectivity": 0.0024000000000000002, "qid": 401}
+{"kind": "group_label", "bin": "1e-03-3e-03", "k": 3, "G": 10, "q": 160, "labels": [163, 174, 178, 180, 182, 186, 193, 194, 197, 198], "selectivity": 0.0024600000000000004, "qid": 402}
+{"kind": "group_label", "bin": "1e-03-3e-03", "k": 3, "G": 10, "q": 153, "labels": [160, 161, 169, 170, 178, 180, 183, 184, 190, 199], "selectivity": 0.0024760000000000003, "qid": 403}
+{"kind": "group_label", "bin": "1e-03-3e-03", "k": 3, "G": 10, "q": 49, "labels": [154, 162, 166, 174, 177, 180, 188, 190, 195, 197], "selectivity": 0.0025200000000000005, "qid": 404}
+{"kind": "group_label", "bin": "1e-03-3e-03", "k": 3, "G": 10, "q": 65, "labels": [154, 162, 163, 174, 185, 188, 191, 192, 194, 197], "selectivity": 0.002584, "qid": 405}
+{"kind": "group_label", "bin": "1e-03-3e-03", "k": 3, "G": 10, "q": 188, "labels": [154, 163, 171, 178, 180, 183, 189, 190, 196, 199], "selectivity": 0.0025160000000000004, "qid": 406}
+{"kind": "group_label", "bin": "1e-03-3e-03", "k": 3, "G": 10, "q": 140, "labels": [154, 161, 162, 173, 175, 178, 180, 182, 189, 194], "selectivity": 0.002656, "qid": 407}
+{"kind": "group_label", "bin": "1e-03-3e-03", "k": 3, "G": 10, "q": 107, "labels": [154, 163, 170, 171, 174, 182, 183, 190, 194, 199], "selectivity": 0.002602, "qid": 408}
+{"kind": "group_label", "bin": "1e-03-3e-03", "k": 3, "G": 10, "q": 122, "labels": [154, 170, 174, 180, 182, 183, 185, 190, 193, 197], "selectivity": 0.0025080000000000002, "qid": 409}
+{"kind": "group_label", "bin": "1e-03-3e-03", "k": 3, "G": 10, "q": 95, "labels": [154, 160, 162, 163, 166, 170, 175, 182, 190, 197], "selectivity": 0.002718, "qid": 410}
+{"kind": "diverse", "k": 10, "cap": 1, "q": 146, "labels": [], "qid": 411}
+{"kind": "diverse", "k": 10, "cap": 1, "q": 170, "labels": [], "qid": 412}
+{"kind": "diverse", "k": 10, "cap": 1, "q": 96, "labels": [], "qid": 413}
+{"kind": "diverse", "k": 10, "cap": 1, "q": 6, "labels": [], "qid": 414}
+{"kind": "diverse", "k": 10, "cap": 1, "q": 5, "labels": [], "qid": 415}
+{"kind": "diverse", "k": 10, "cap": 1, "q": 1, "labels": [], "qid": 416}
+{"kind": "diverse", "k": 10, "cap": 1, "q": 53, "labels": [], "qid": 417}
+{"kind": "diverse", "k": 10, "cap": 1, "q": 79, "labels": [], "qid": 418}
+{"kind": "diverse", "k": 10, "cap": 1, "q": 136, "labels": [], "qid": 419}
+{"kind": "diverse", "k": 10, "cap": 1, "q": 119, "labels": [], "qid": 420}
+{"kind": "diverse", "k": 10, "cap": 1, "q": 69, "labels": [], "qid": 421}
+{"kind": "diverse", "k": 10, "cap": 1, "q": 169, "labels": [], "qid": 422}
+{"kind": "diverse", "k": 10, "cap": 1, "q": 83, "labels": [], "qid": 423}
+{"kind": "diverse", "k": 10, "cap": 1, "q": 130, "labels": [], "qid": 424}
+{"kind": "diverse", "k": 10, "cap": 1, "q": 139, "labels": [], "qid": 425}
+{"kind": "diverse", "k": 10, "cap": 1, "q": 102, "labels": [], "qid": 426}
+{"kind": "diverse", "k": 10, "cap": 1, "q": 171, "labels": [], "qid": 427}
+{"kind": "diverse", "k": 10, "cap": 1, "q": 111, "labels": [], "qid": 428}
+{"kind": "diverse", "k": 10, "cap": 1, "q": 190, "labels": [], "qid": 429}
+{"kind": "diverse", "k": 10, "cap": 1, "q": 51, "labels": [], "qid": 430}
+{"kind": "diverse", "k": 100, "cap": 1, "q": 0, "labels": [], "qid": 431}
+{"kind": "diverse", "k": 100, "cap": 1, "q": 31, "labels": [], "qid": 432}
+{"kind": "diverse", "k": 100, "cap": 1, "q": 65, "labels": [], "qid": 433}
+{"kind": "diverse", "k": 100, "cap": 1, "q": 2, "labels": [], "qid": 434}
+{"kind": "diverse", "k": 100, "cap": 1, "q": 175, "labels": [], "qid": 435}
+{"kind": "diverse", "k": 100, "cap": 1, "q": 78, "labels": [], "qid": 436}
+{"kind": "diverse", "k": 100, "cap": 1, "q": 177, "labels": [], "qid": 437}
+{"kind": "diverse", "k": 100, "cap": 1, "q": 83, "labels": [], "qid": 438}
+{"kind": "diverse", "k": 100, "cap": 1, "q": 109, "labels": [], "qid": 439}
+{"kind": "diverse", "k": 100, "cap": 1, "q": 135, "labels": [], "qid": 440}
+{"kind": "diverse", "k": 100, "cap": 1, "q": 30, "labels": [], "qid": 441}
+{"kind": "diverse", "k": 100, "cap": 1, "q": 165, "labels": [], "qid": 442}
+{"kind": "diverse", "k": 100, "cap": 1, "q": 77, "labels": [], "qid": 443}
+{"kind": "diverse", "k": 100, "cap": 1, "q": 23, "labels": [], "qid": 444}
+{"kind": "diverse", "k": 100, "cap": 1, "q": 5, "labels": [], "qid": 445}
+{"kind": "diverse", "k": 100, "cap": 1, "q": 163, "labels": [], "qid": 446}
+{"kind": "diverse", "k": 100, "cap": 1, "q": 48, "labels": [], "qid": 447}
+{"kind": "diverse", "k": 100, "cap": 1, "q": 171, "labels": [], "qid": 448}
+{"kind": "diverse", "k": 100, "cap": 1, "q": 82, "labels": [], "qid": 449}
+{"kind": "diverse", "k": 100, "cap": 1, "q": 188, "labels": [], "qid": 450}
+{"kind": "diverse", "k": 10, "cap": 2, "q": 110, "labels": [], "qid": 451}
+{"kind": "diverse", "k": 10, "cap": 2, "q": 91, "labels": [], "qid": 452}
+{"kind": "diverse", "k": 10, "cap": 2, "q": 155, "labels": [], "qid": 453}
+{"kind": "diverse", "k": 10, "cap": 2, "q": 35, "labels": [], "qid": 454}
+{"kind": "diverse", "k": 10, "cap": 2, "q": 80, "labels": [], "qid": 455}
+{"kind": "diverse", "k": 10, "cap": 2, "q": 104, "labels": [], "qid": 456}
+{"kind": "diverse", "k": 10, "cap": 2, "q": 160, "labels": [], "qid": 457}
+{"kind": "diverse", "k": 10, "cap": 2, "q": 33, "labels": [], "qid": 458}
+{"kind": "diverse", "k": 10, "cap": 2, "q": 78, "labels": [], "qid": 459}
+{"kind": "diverse", "k": 10, "cap": 2, "q": 170, "labels": [], "qid": 460}
+{"kind": "diverse", "k": 10, "cap": 2, "q": 120, "labels": [], "qid": 461}
+{"kind": "diverse", "k": 10, "cap": 2, "q": 84, "labels": [], "qid": 462}
+{"kind": "diverse", "k": 10, "cap": 2, "q": 130, "labels": [], "qid": 463}
+{"kind": "diverse", "k": 10, "cap": 2, "q": 140, "labels": [], "qid": 464}
+{"kind": "diverse", "k": 10, "cap": 2, "q": 146, "labels": [], "qid": 465}
+{"kind": "diverse", "k": 10, "cap": 2, "q": 10, "labels": [], "qid": 466}
+{"kind": "diverse", "k": 10, "cap": 2, "q": 43, "labels": [], "qid": 467}
+{"kind": "diverse", "k": 10, "cap": 2, "q": 74, "labels": [], "qid": 468}
+{"kind": "diverse", "k": 10, "cap": 2, "q": 103, "labels": [], "qid": 469}
+{"kind": "diverse", "k": 10, "cap": 2, "q": 82, "labels": [], "qid": 470}
+{"kind": "diverse", "k": 100, "cap": 2, "q": 87, "labels": [], "qid": 471}
+{"kind": "diverse", "k": 100, "cap": 2, "q": 39, "labels": [], "qid": 472}
+{"kind": "diverse", "k": 100, "cap": 2, "q": 66, "labels": [], "qid": 473}
+{"kind": "diverse", "k": 100, "cap": 2, "q": 143, "labels": [], "qid": 474}
+{"kind": "diverse", "k": 100, "cap": 2, "q": 38, "labels": [], "qid": 475}
+{"kind": "diverse", "k": 100, "cap": 2, "q": 112, "labels": [], "qid": 476}
+{"kind": "diverse", "k": 100, "cap": 2, "q": 75, "labels": [], "qid": 477}
+{"kind": "diverse", "k": 100, "cap": 2, "q": 186, "labels": [], "qid": 478}
+{"kind": "diverse", "k": 100, "cap": 2, "q": 76, "labels": [], "qid": 479}
+{"kind": "diverse", "k": 100, "cap": 2, "q": 107, "labels": [], "qid": 480}
+{"kind": "diverse", "k": 100, "cap": 2, "q": 185, "labels": [], "qid": 481}
+{"kind": "diverse", "k": 100, "cap": 2, "q": 157, "labels": [], "qid": 482}
+{"kind": "diverse", "k": 100, "cap": 2, "q": 169, "labels": [], "qid": 483}
+{"kind": "diverse", "k": 100, "cap": 2, "q": 139, "labels": [], "qid": 484}
+{"kind": "diverse", "k": 100, "cap": 2, "q": 35, "labels": [], "qid": 485}
+{"kind": "diverse", "k": 100, "cap": 2, "q": 48, "labels": [], "qid": 486}
+{"kind": "diverse", "k": 100, "cap": 2, "q": 57, "labels": [], "qid": 487}
+{"kind": "diverse", "k": 100, "cap": 2, "q": 197, "labels": [], "qid": 488}
+{"kind": "diverse", "k": 100, "cap": 2, "q": 126, "labels": [], "qid": 489}
+{"kind": "diverse", "k": 100, "cap": 2, "q": 129, "labels": [], "qid": 490}

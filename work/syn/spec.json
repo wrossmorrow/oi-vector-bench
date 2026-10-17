@@ -1,0 +1,26 @@
+{
+  "ks": [
+    10,
+    100
+  ],
+  "n_per_cell": 20,
+  "log10_top": 0.0,
+  "log10_bottom": -5.0,
+  "bin_step": 0.5,
+  "ftypes": [
+    "pos",
+    "rand",
+    "neg"
+  ],
+  "group_sizes": [
+    10,
+    100
+  ],
+  "group_n": 3,
+  "diverse_caps": [
+    1,
+    2
+  ],
+  "lift_top": 1000,
+  "seed": 0
+}
